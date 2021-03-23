@@ -71,6 +71,12 @@ def add_post(request):
 
   return Response({"seccess": True})
 
+@api_view(['DELETE'])
+def delete_post(request, id):
+  post = Post.objects.get(pk=id)
+  post.image.delete(save=True)
+  post.delete()
+  return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
 def add_avatar_or_back_photo(request):
@@ -97,7 +103,6 @@ def get_avatar_photo(request, username):
   return Response({"avatarURL": avatar.imgURL})
    
 
-
 @api_view(['GET'])
 def get_background_photo(request, username):
 
@@ -110,8 +115,6 @@ def get_background_photo(request, username):
 
   return Response({"backgroundURL": background.imgURL})
   
-    
-
   
 @api_view(['GET'])
 def get_posts_for_user(request, username):

@@ -1,8 +1,7 @@
 import { ProfileAPI } from '../../API/api';
 import { stopSubmit } from 'redux-form';
 
-const DELETE_POST = 'Profile/DELETE-POST',
-      FETCHING = 'Profile/FETCHING',
+const FETCHING = 'Profile/FETCHING',
       AVATAR_PHOTO = 'Profile/AVATAR_PHOTO',
       BACKGROUND_PHOTO = 'Profile/BACKGROUND_PHOTO',
       SET_USER_PROFILE = 'Profile/SET-USER-PROFILE';
@@ -16,11 +15,6 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch(action.type) {
-
-    case DELETE_POST:
-      return {...state,
-        posts: state.posts.filter(p => p.id !== action.postId)
-      };
       
     case SET_USER_PROFILE:
       return {...state,
@@ -47,7 +41,6 @@ const profileReducer = (state = initialState, action) => {
 };
 
 // ACTIONS CREATOR
-export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const updateFetching = (value) => ({type: FETCHING, value});
 export const setAvatarPhoto = (url) => ({type: AVATAR_PHOTO, url});
@@ -84,6 +77,9 @@ export const setPhoto = (photo, {login, flag}) => async (dispatch) => {
     if(flag === 'avatar') dispatch(setAvatarPhoto(response.data.avatarURL))
     else dispatch(setBackgroundPhoto(response.data.backgroundURL))  
   }
+};
+export const deletePost = (id) => async () => {
+  const response = await ProfileAPI.deletePost(id);
 };
 
 

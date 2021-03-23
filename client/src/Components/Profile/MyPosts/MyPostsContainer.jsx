@@ -2,7 +2,7 @@ import { updateFetching } from '../../../Redux/Reducer/profileReducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { setPost } from '../../../Redux/Reducer/profileReducer';
+import { setPost, deletePost } from '../../../Redux/Reducer/profileReducer';
 
 let mapStateToProps = (state) => {
   return {
@@ -14,5 +14,5 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-  connect(mapStateToProps, {setPost, updateFetching})
+  connect(mapStateToProps, { setPost, updateFetching, deletePost })
 )(MyPosts);

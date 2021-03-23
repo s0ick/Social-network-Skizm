@@ -76,6 +76,11 @@ export const ProfileAPI = {
   setPhoto(photo, username, flag) {
     const url = `${API_BASE_URL}users/add_photos/`;
     return Axios.post(url, {photo, username, flag});
+  },
+
+  deletePost(id) {
+    const url = `${API_BASE_URL}users/delete_post/${id}`;
+    return Axios.delete(url);
   }
 };
 

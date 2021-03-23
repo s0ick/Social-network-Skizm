@@ -1,8 +1,8 @@
 import React from 'react';
-import style from './MyPosts.module.css';
+import style from '../MyPosts.module.css';
 import { reduxForm, Field } from 'redux-form';
-import { Textarea, FieldFileInput, Input } from '../../common/FormsControls/FormsControls';
-import { tagsIsValid, required } from '../../../Utils/Validators/validators';
+import { Textarea, FieldFileInput, Input } from '../../../common/FormsControls/FormsControls';
+import { tagsIsValid, required } from '../../../../Utils/Validators/validators';
 
 
 const AddPostForm = ({handleSubmit}) => {

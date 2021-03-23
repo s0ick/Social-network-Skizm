@@ -1,6 +1,7 @@
 from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto
 from django.core.files.base import ContentFile
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 import base64
 import random
@@ -35,13 +36,10 @@ def _add_image_to_model(model, request, media):
   model.imgURL = model.get_absolute_url_image()
   model.save()
 
-  if media == 'avatar' or media == 'background':
+  if media == 'avatar':
     posts = Post.objects.filter(profile_user=profile)
     for post in posts:
-      if media == 'avatar':
-        post.avatarURL = model.get_absolute_url_image()
-      else: 
-        post.backgroundURL = model.get_absolute_url_image()
+      post.avatarURL = model.get_absolute_url_image()
       post.save()
 
   return model
@@ -52,9 +50,14 @@ def _create_instance_post(request):
   tags = request.data['tags']
   username = request.data['username']
   avatarURL = request.data['avatarURL']
-  backgroundURL = request.data['backgroundURL']
 
   profile = ProfileUser.objects.get(user__username=username)
+
+  try:
+    backgroundURL = BackgroundPhoto.objects.get(profile_user=profile)
+  except ObjectDoesNotExist:
+    backgroundURL = BackgroundPhoto.objects.create(profile_user=profile, image="", imgURL="")
+
   post = Post.objects.create(profile_user=profile, text=textBody, tags=tags, author=username, avatarURL=avatarURL, backgroundURL=backgroundURL)
   return post
 

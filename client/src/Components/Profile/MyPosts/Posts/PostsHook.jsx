@@ -39,8 +39,14 @@ const PostsHook = (props) => {
         setFetching(true);
       }
   };
+
+  const deletePost = (id) => {
+    setPosts(posts.filter(p => p.pk !== id));
+    props.deletePost(id);
+  };
+
   return (
-    <div>
+    <>
       {
         posts.map(p => <Post pk={p.pk}
           key={`post_${p.pk}`}  
@@ -50,9 +56,10 @@ const PostsHook = (props) => {
           avatar={p.avatarURL} 
           author={p.author} 
           date ={p.date}
-          likeCount="0" />)
+          likeCount="0"
+          deletePost={deletePost} />)
       }
-    </div>
+    </>
   )
 }
 export default PostsHook;

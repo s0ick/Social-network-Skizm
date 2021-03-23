@@ -82,7 +82,7 @@ class Post(models.Model):
     try:
       return self.backgroundURL.imgURL
     except:
-      return ""  
+      return ""
 
   @property
   def short_text(self):

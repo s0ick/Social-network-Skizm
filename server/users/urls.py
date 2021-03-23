@@ -8,6 +8,7 @@ urlpatterns = [
   url(r'^profile/(?P<username>[0-9a-zA-z]+)$', profile_action),
 
   url("add_post/", add_post),
+  url(r'^delete_post/(?P<id>[0-9]+)$', delete_post),
   url(r'^get_posts/(?P<username>[0-9a-zA-z]+)$', get_posts_for_user),
   url(r'^get_posts_in_feed/$', get_posts_for_feed),
 

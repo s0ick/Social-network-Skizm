@@ -1,11 +1,11 @@
 import React from 'react';
 import style from'./MyPosts.module.css';
-import MyPostForm from './MyPostForm';
+import MyPostForm from './Form/MyPostForm';
 import Preloader from '../../common/Preloader/Preloader';
 import { pushPost } from '../../../Utils/Helper/helper';
 import PostsHook from './Posts/PostsHook';
 
-const MyPosts = React.memo(({feedName, fetching, login, setPost, updateFetching, match, avatarPhoto}) => {
+const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, updateFetching, match, avatarPhoto}) => {
 
   const addNewPost = (values) => {
     const { imgForPost, postBody, tags } = values;
@@ -31,7 +31,7 @@ const MyPosts = React.memo(({feedName, fetching, login, setPost, updateFetching,
       <div className={style.postsBlock}>
         { login == match.params.login &&
           (
-            fetching ? <div className={style.fetching}><Preloader /></div> : <PostsHook username={match.params.login} />
+            fetching ? <div className={style.fetching}><Preloader /></div> : <PostsHook username={match.params.login} deletePost={deletePost} />
           )
         }
       </div>
