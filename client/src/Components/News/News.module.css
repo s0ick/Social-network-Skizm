@@ -1,0 +1,143 @@
+.block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  height: auto;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 10px;
+  border-bottom: 1.5px solid #64ffda;
+  border-radius: 4px;
+  padding-bottom: 6px;
+}
+
+.null {
+  display: block;
+  text-align: center;
+  color: rgb(172, 172, 172);
+  font-weight: 400;
+}
+
+.fetching div {
+  left: 46%;
+  top: 380px;
+}
+
+.container {
+  position: absolute;
+  right: 35px;
+  top: 400px;
+  height: 100%;
+  width: 316px;
+}
+
+.slick {
+  position: sticky;
+  right: 15px;
+  top: 400px;
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background-color: #263238;
+  color: #fff;
+  box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, .3);
+  overflow: auto;
+  border-radius: 12px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.item {
+  width: 250px;
+  min-height: 56px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  border-bottom: 1px solid #565c68;
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.user {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -43px;
+  left: 0;
+  z-index: -2;
+}
+
+.backgroundImage {
+  width: 100%;
+  filter: brightness(65%)
+}
+
+.ava {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.img {
+  width: 150%;
+}
+
+.button {
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  display: block;
+  width: 30px;
+  height: 30px;
+  overflow: hidden; 
+  position: relative;
+}
+
+.button img {
+  width: 100%;
+  height: 100%;
+  transition: .2s;
+}
+
+.button:hover img {
+  filter: drop-shadow(0px 0px 3px #64ffda)
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 70px;
+  height: 70px;
+  background-color: #37474f;
+  top: -8px;
+  right: -20px;
+  z-index: -1;
+  transform: rotate(45deg);
+  border: 1px solid #64ffda;
+  opacity: .5;
+}

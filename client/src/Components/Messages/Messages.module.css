@@ -1,0 +1,143 @@
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+.dialogsblock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 7px;
+  justify-content: flex-start;
+  width: 30%;
+  height: 100%;
+  border-right: 2px solid #64ffda;
+}
+.messageBlock {
+  width: 70%;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  background-color: rgb(29, 37, 41);
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+}
+.item {
+  width: 100%;
+  padding-left: 6px;
+}
+.item a {
+  text-shadow: 0 0 3px rgba(0, 0, 0, .4);
+  color: #fff;
+  text-decoration: none;
+}
+.activeDialog {
+  transform: scale(1.1, 1.1) !important; 
+  color:#64ffda !important;
+  background-color: rgb(29, 37, 41) !important;
+}
+.ava {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+.img {
+  width: 150%;
+  min-width: 150%;
+}
+.dialogItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 90%;
+  transition: .2s;
+}
+.dialogItem:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.messageYou, .messageFriend  {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+}
+.messageFriend {
+  justify-content: flex-end;
+}
+.messageYou{
+  justify-content: flex-start;
+}
+.text {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.panel {
+  margin-top: 30px;
+  border-top: 1px solid #565c68;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.textarea {
+  min-width: 500px;
+  max-width: 500px;
+
+  min-height: 20px;
+  max-height: 20px;
+
+  display: block;
+  background-color: transparent;
+  outline: none;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #565c68;
+  padding: 10px;
+  margin-bottom: 10px;
+  transition: .2s;
+}
+.textarea:focus {
+  border-bottom: 2px solid #64ffda;
+}
+
+.button {
+  color: #fff;
+  background-color: transparent;
+  border: 1.5px solid #64ffda;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 4px 10px;
+  width: 130px;
+  font-weight: 700;
+  transition: .2s;
+  outline: none;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+.button:hover {
+  box-shadow: inset 0 0 7px 2px rgba(72, 255, 194, 0.5);
+}
