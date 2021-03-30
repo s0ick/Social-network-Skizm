@@ -8,15 +8,44 @@ import random
 import string
 
 def create_post(request):
-
   return _create_instance_post(request)
 
 
 def create_post_with_image(request):
-
   post = _create_instance_post(request)
   _add_image_to_model(post, request, 'post')
   return post
+
+
+def update_post_on_id(request, id):
+  post = Post.objects.get(pk=id)
+
+  if request.data['photo']:
+    post.image.delete(save=True)
+    _add_image_to_model(post, request, 'post')
+    
+  if request.data['textBody']:
+    post.text = request.data['textBody']
+
+  if request.data['tags']:
+    post.tags = request.data['tags']
+  post.save()
+
+
+def create_background_or_avatar(model, request, media):
+  username = request.data['username']
+  profile = ProfileUser.objects.get(user__username=username)
+
+  if model.objects.all().count() == 0:
+    photo = model.objects.create(profile_user=profile)
+  elif model.objects.get(profile_user=profile):
+    photo = model.objects.get(profile_user=profile)
+  else: 
+    photo = model.objects.create(profile_user=profile)
+
+  return _add_image_to_model(photo, request, media)
+
+
 
 
 def _add_image_to_model(model, request, media):
@@ -26,7 +55,7 @@ def _add_image_to_model(model, request, media):
   username = request.data['username']
   profile = ProfileUser.objects.get(user__username=username)  
     
-  filename = get_file_name(model, media)
+  filename = _get_file_name(model, media)
   image_base64 = request.data['photo']
   format, image_base64 = image_base64.split(";base64,")
   ext = format.split('/')[-1]
@@ -62,27 +91,13 @@ def _create_instance_post(request):
   return post
 
 
-def get_file_name(model, media):
+def _get_file_name(model, media):
   rand_string = _generate_random_string(6)
   return f"{media}_id_{model.id}_profile_id_{model.profile_user.id}_{rand_string}"
 
 
-def create_background_or_avatar(model, request, media):
-  username = request.data['username']
-  profile = ProfileUser.objects.get(user__username=username)
-
-  if model.objects.all().count() == 0:
-    photo = model.objects.create(profile_user=profile)
-  elif model.objects.get(profile_user=profile):
-    photo = model.objects.get(profile_user=profile)
-  else: 
-    photo = model.objects.create(profile_user=profile)
-
-  return _add_image_to_model(photo, request, media)
-
-
 def _generate_random_string(length):
-    letters = string.ascii_lowercase
-    rand_string = ''.join(random.choice(letters) for i in range(length))
-    return rand_string
+  letters = string.ascii_lowercase
+  rand_string = ''.join(random.choice(letters) for i in range(length))
+  return rand_string
 

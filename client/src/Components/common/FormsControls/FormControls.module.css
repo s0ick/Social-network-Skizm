@@ -133,3 +133,21 @@
 .icon:hover img {
   filter: drop-shadow(0px 0px 3px #64ffda)
 }
+
+.imageFile::-webkit-file-upload-button {
+  border: none;
+  outline: none;
+  padding: 6px 20px;
+  border-radius: 8px;
+  transition: .2s;
+  background-color: #263238;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
+.imageFile::-webkit-file-upload-button:hover {
+  background-color: #64ffda;
+  color: #111111;
+}

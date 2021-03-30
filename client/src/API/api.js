@@ -81,6 +81,13 @@ export const ProfileAPI = {
   deletePost(id) {
     const url = `${API_BASE_URL}users/delete_post/${id}`;
     return Axios.delete(url);
+  },
+
+  updatePost(id, photo, textBody, tags, username) {
+    const url = `${API_BASE_URL}users/update_post/${id}`;
+    return Axios
+      .put(url, {photo, textBody, tags, username})
+      .then(response => response.data)
   }
 };
 

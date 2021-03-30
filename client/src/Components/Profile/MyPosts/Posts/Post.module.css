@@ -84,6 +84,9 @@
   margin: auto;
   border-radius: 8px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .image {
   height: 100%;
@@ -103,6 +106,7 @@
   height: 20px;
   margin-left: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .cub {
@@ -113,6 +117,7 @@
   width: 3px;
   height: 3px;
   background-color: #64ffda;
+  cursor: pointer;
 }
 .cub::after {
   content: '';

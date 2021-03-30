@@ -4,27 +4,34 @@ import userImg from '../../../../assets/images/user_null.png';
 import { formatDate } from '../../../../Utils/Helper/helper';
 
 const Post = (props) => {
-  const [ editMode, setEditMode ] = useState(false);
+  const [ editPanel, setEditPanel ] = useState(false);
 
   const activateEditMode = () => {
-    setEditMode(prevState => !prevState);
+    setEditPanel(prevState => !prevState);
   };
 
   const deletePost = () => {
     props.deletePost(props.pk);
-    setEditMode(prevState => !prevState);
+    setEditPanel(false);
   };
 
-  let ava = '';
-  if(!!props.avatar) ava = props.avatar;
-  else ava = userImg;
+  const editPost = () => {
+    props.setEdit(prevState => !prevState);
+    props.setPostContent({
+      id: props.pk,
+      text: props.message,
+      tags: props.tags,
+      photoURL: props.photoURL
+    });
+    setEditPanel(false);
+  };
 
   let refDate = formatDate(props.date);
 
   return (
     <div className={style.item} id={`post_id_${props.pk}`}>
       <div className={style.ava}>
-        <img className={style.img} src={ava} alt="ava"/>
+        <img className={style.img} src={!!props.avatar ? props.avatar : userImg} alt="ava"/>
       </div>
         
       <div className={style.content}>
@@ -33,16 +40,18 @@ const Post = (props) => {
           <span className={style.date}>{refDate}</span>
           <div className={style.container}>
             <span className={style.like}>{props.likeCount} Like</span>
-            <button className={style.button} onClick={activateEditMode}>
-              <span className={style.cub}></span>
-            </button>
+            { props.login == props.username && 
+              <button className={style.button} onClick={activateEditMode}>
+                <span className={style.cub}></span>
+              </button>
+            }
           </div>
 
-          { editMode &&
+          { editPanel &&
             <div className={style.panel}>
               <button className={style.action} onClick={deletePost}>Delete post</button>
               <span className={style.line}></span>
-              <button className={style.action}>Edit post</button>
+              <button className={style.action} onClick={editPost}>Edit post</button>
             </div>
           }
         </div>

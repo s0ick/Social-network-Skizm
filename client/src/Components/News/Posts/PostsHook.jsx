@@ -67,18 +67,20 @@ const PostsHook = (props) => {
   return (
     <div>
       {
-        (
-          posts.length === 0 ? <h3 className={style.null}>No posts found. Add tags or follow someone</h3> :
-            posts.map(p => <Post pk={p.pk}
-              key={`post_${p.pk}`} 
-              message={p.text} 
-              photoURL={p.imgURL} 
-              tags={p.tags} 
-              avatar={p.avatarURL} 
-              author={p.author} 
-              date ={p.date}
-              likeCount="0" />)
-        )
+        posts.length === 0 ? <h3 className={style.null}>No posts found. Add tags or follow someone</h3> :
+          posts.map(p => <Post pk={p.pk}
+            key={`post_${p.pk}`} 
+            message={p.text} 
+            photoURL={p.imgURL} 
+            tags={p.tags} 
+            avatar={p.avatarURL} 
+            author={p.author} 
+            date ={p.date}
+
+            likeCount="0"
+            username={props.username} 
+            login={props.login} 
+          />)
       }
     </div>
   )

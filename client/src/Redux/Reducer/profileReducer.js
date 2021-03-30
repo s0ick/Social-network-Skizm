@@ -4,6 +4,7 @@ import { stopSubmit } from 'redux-form';
 const FETCHING = 'Profile/FETCHING',
       AVATAR_PHOTO = 'Profile/AVATAR_PHOTO',
       BACKGROUND_PHOTO = 'Profile/BACKGROUND_PHOTO',
+      MATCH_LOGIN = 'Profile/MATCH_LOGIN',
       SET_USER_PROFILE = 'Profile/SET-USER-PROFILE';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   fetching: false,
   avatarPhoto: null,
   backgroundPhoto: null,
+  matchLogin: ''
 };     
 
 const profileReducer = (state = initialState, action) => {
@@ -35,6 +37,11 @@ const profileReducer = (state = initialState, action) => {
       return {...state,
         backgroundPhoto: action.url
       };
+
+    case MATCH_LOGIN:
+      return {...state,
+        matchLogin: action.matchLogin
+      }; 
     
     default: return state;  
   }
@@ -45,6 +52,7 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const updateFetching = (value) => ({type: FETCHING, value});
 export const setAvatarPhoto = (url) => ({type: AVATAR_PHOTO, url});
 export const setBackgroundPhoto = (url) => ({type: BACKGROUND_PHOTO, url});
+export const setMatchLogin = (matchLogin) => ({type: MATCH_LOGIN, matchLogin});
 
 // THUNK CREATORS
 export const getProfile = (username, login) => async (dispatch) => {
@@ -79,7 +87,11 @@ export const setPhoto = (photo, {login, flag}) => async (dispatch) => {
   }
 };
 export const deletePost = (id) => async () => {
-  const response = await ProfileAPI.deletePost(id);
+  await ProfileAPI.deletePost(id);
+};
+export const updatePost = (photo, {postBody, tags, username, id}) => async (dispatch) => {
+  await ProfileAPI.updatePost(id, photo, postBody, tags, username)
+  dispatch(updateFetching(false));
 };
 
 

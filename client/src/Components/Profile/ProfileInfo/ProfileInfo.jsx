@@ -13,7 +13,7 @@ import Instagram from '../../../assets/images/contacts/inst.svg';
 import WebSite from '../../../assets/images/contacts/website.svg';
 import Twitter from '../../../assets/images/contacts/twitter.svg';
 
-const ProfileInfo = React.memo(({props, match}) => {
+const ProfileInfo = React.memo(({props}) => {
   let profile = props.profile,
       backgroundPhoto = props.backgroundPhoto,
       avatarPhoto = props.avatarPhoto;  

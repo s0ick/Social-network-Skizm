@@ -18,7 +18,6 @@ const PostsHook = (props) => {
           setPosts([...posts, ...response.data.data]);
           setCurrentPage(prevState => prevState + 1);
           setTotalCount(response.data.count);
-          
         })
         .finally(() => setFetching(false));
     }
@@ -56,8 +55,14 @@ const PostsHook = (props) => {
           avatar={p.avatarURL} 
           author={p.author} 
           date ={p.date}
+
           likeCount="0"
-          deletePost={deletePost} />)
+          deletePost={deletePost}
+          setEdit={props.setEdit}
+          setPostContent={props.setPostContent}
+          username={props.username}
+          login={props.login}
+        />)
       }
     </>
   )

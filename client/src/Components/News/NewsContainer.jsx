@@ -2,6 +2,7 @@ import { updateFetching, updateTags, setAuthor } from '../../Redux/Reducer/newsR
 import News from './News';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 let mapStateToProps = (state) => {
   return {
@@ -13,5 +14,6 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-  connect(mapStateToProps, { updateFetching, updateTags, setAuthor })
+  connect(mapStateToProps, { updateFetching, updateTags, setAuthor }),
+  withRouter
 )(News);

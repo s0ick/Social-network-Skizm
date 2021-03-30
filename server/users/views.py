@@ -6,7 +6,7 @@ from .serializers import *
 
 from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto
 from django.contrib.auth.models import User
-from .service import create_post, create_post_with_image, create_background_or_avatar
+from .service import create_post, create_post_with_image, create_background_or_avatar, update_post_on_id
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -77,6 +77,12 @@ def delete_post(request, id):
   post.image.delete(save=True)
   post.delete()
   return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+def update_post(request, id):
+  update_post_on_id(request, id)
+  return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 def add_avatar_or_back_photo(request):

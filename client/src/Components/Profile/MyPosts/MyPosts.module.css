@@ -4,6 +4,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 
 .textarea {
@@ -81,4 +82,25 @@
 .fetching div {
   top: 25% !important;
   left: 46.5% !important;
+}
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .75);
+}
+
+.dialog {
+  position: sticky;
+  top: 20%;
+  left: 33%;
+  background-color: #37474f;
+  width: 450px;
+  border-bottom-right-radius: 24px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }

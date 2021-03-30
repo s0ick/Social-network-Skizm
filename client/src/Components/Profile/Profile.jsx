@@ -6,8 +6,8 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 const Profile = (props) => {
   return (
     <div className={style.block}>
-      <ProfileInfo props={props} match={props.match}/>
-      <MyPostsContainer match={props.match} />
+      <ProfileInfo props={props} />
+      <MyPostsContainer />
     </div>
   )
 }

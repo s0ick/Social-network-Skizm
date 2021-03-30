@@ -27,6 +27,13 @@ export const Input = (props) => {
          </FormControl>
 };
 
+export const Hidden = (props) => {
+  const {input, meta, ...restProps} = props;
+  return <FormControl {...props}>
+           <input {...input} {...restProps} />
+         </FormControl>
+};
+
 export class FieldFileInput extends React.Component{
   constructor(props) {
     super(props)
@@ -49,6 +56,28 @@ export class FieldFileInput extends React.Component{
             <span className={style.icon}><img src={imgIcon} alt="photo"/></span>
           </label>
         </div>
+      </FormControl>
+    )
+  }
+}
+
+export class FieldFileInputButton extends React.Component{
+  constructor(props) {
+    super(props)
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(e) {
+    const { input: { onChange } } = this.props
+    onChange(e.target.files[0])
+  }
+
+  render(){
+    const { input: { value } } = this.props;
+    const {input, meta, ...restProps } = this.props;
+    return (
+      <FormControl {...this.props}>
+        <input className={style.imageFile} {...restProps} name={`${input.name}`} onChange={this.onChange} accept={restProps.accept} />
       </FormControl>
     )
   }
