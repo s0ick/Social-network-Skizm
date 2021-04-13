@@ -24,7 +24,7 @@ const News =  React.memo(({fetching, tags, authors, username, updateFetching, up
       <NewsForm onSubmit={onSubmit} tags={tags} />
       <div className={style.container}>
         <div className={style.slick}>
-          <h3 className={style.title}>Post Authors</h3>
+          <h3 className={style.title}>Авторы постов</h3>
           
           {
             authors && authors.map(elem => {

@@ -1,3 +1,6 @@
+from rest_framework.response import Response
+from rest_framework import status
+from django.contrib.auth.models import User
 from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto
 from django.core.files.base import ContentFile
 from django.conf import settings
@@ -31,6 +34,28 @@ def update_post_on_id(request, id):
     post.tags = request.data['tags']
   post.save()
 
+def update_timer(request, username):
+  
+  try:
+    user = User.objects.get(username=username)
+  except ObjectDoesNotExist:
+    return Response(status=status.HTTP_404_NOT_FOUND)
+
+  profile = ProfileUser.objects.get(user=user) 
+  profile.valueOnline = request.data['valueOnline']
+  profile.valueOffline = request.data['valueOffline']
+  profile.disabled = request.data['disabled']
+  profile.blocked = request.data['blocked']
+  profile.date_blocked = request.data['dateBlocked']
+  profile.save()
+
+  return {
+    "valueOnline": profile.valueOnline,
+    "valueOffline": profile.valueOffline,
+    "disabled": profile.disabled,
+    "blocked": profile.blocked,
+    "dateBlocked": profile.date_blocked
+  }        
 
 def create_background_or_avatar(model, request, media):
   username = request.data['username']

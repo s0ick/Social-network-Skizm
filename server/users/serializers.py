@@ -17,7 +17,7 @@ class UserSerializer2(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = ProfileUser
-    fields = ('pk', 'aboutMe', 'userStatus', 'job', 'country', 'city', 'feedName', 'facebook', 'my_site', 'vk', 'twitter', 'instagram', 'you_tube', 'git_hub')
+    fields = ('pk', 'aboutMe', 'userStatus', 'job', 'country', 'city', 'feedName', 'facebook', 'my_site', 'vk', 'twitter', 'instagram', 'you_tube', 'git_hub', 'valueOnline', 'valueOffline', 'disabled', 'blocked', 'date_blocked')
 
 
 class PostSerializer(serializers.ModelSerializer):

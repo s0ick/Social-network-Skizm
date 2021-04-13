@@ -25,7 +25,7 @@ class ProfileContainer extends React.Component {
     let { getProfile, login, match, getTags} = this.props;
     let username = match.params.login;
     getProfile(username, login);
-    if(this.props.match.params.login == login) getTags(username);
+    if(this.props.match.params.login === login) getTags(username);
   }
 
   render() {

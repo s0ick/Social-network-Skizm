@@ -6,7 +6,7 @@ from .serializers import *
 
 from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto
 from django.contrib.auth.models import User
-from .service import create_post, create_post_with_image, create_background_or_avatar, update_post_on_id
+from .service import create_post, create_post_with_image, create_background_or_avatar, update_post_on_id, update_timer
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -82,6 +82,11 @@ def delete_post(request, id):
 def update_post(request, id):
   update_post_on_id(request, id)
   return Response(status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+def update_tomato(request, username):
+  obj = update_timer(request, username)
+  return Response(data=obj, status=status.HTTP_200_OK)  
 
 
 @api_view(['POST'])
@@ -211,4 +216,4 @@ def get_posts_for_feed(request):
 
   return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages})  
 
-    
+

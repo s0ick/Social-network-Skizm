@@ -6,7 +6,8 @@ let mapStateToProps = (state) => {
   return {
     item: state.SideBar.item,
     isAuth: state.auth.isAuth,
-    login: state.auth.login
+    login: state.auth.login,
+    blocked: state.TomatoPage.blocked
   };
 };
 

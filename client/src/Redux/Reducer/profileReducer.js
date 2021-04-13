@@ -1,5 +1,5 @@
 import { ProfileAPI } from '../../API/api';
-import { stopSubmit } from 'redux-form';
+import { setValueOnline, setValueOffline, setDisabled, setBlocked, setDateBlocked } from './pomodoroReducer';
 
 const FETCHING = 'Profile/FETCHING',
       AVATAR_PHOTO = 'Profile/AVATAR_PHOTO',
@@ -59,6 +59,11 @@ export const getProfile = (username, login) => async (dispatch) => {
   if(!username) username = login;
   await ProfileAPI.getProfile(username)
     .then(response => {
+      dispatch(setDisabled(response.disabled));
+      dispatch(setBlocked(response.blocked));
+      dispatch(setValueOnline(response.valueOnline));
+      dispatch(setValueOffline(response.valueOffline));
+      dispatch(setDateBlocked(response.date_blocked));
       dispatch(setUserProfile(response));
     });
   await ProfileAPI.getAvatarPhoto(username)

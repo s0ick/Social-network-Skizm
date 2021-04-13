@@ -4,7 +4,7 @@ import style from'../ProfileInfo.module.css';
 const ProfileStatus = (props) => {
     return (
       <div className={style.personalInfo}>
-        <span className={style.subtitle}>Status:</span>
+        <span className={style.subtitle}>Статус</span>
         <div className={style.statusPanel}>
         <p className={style.status}>{!props.status ? 'Hello!' : props.status}</p>
         </div>

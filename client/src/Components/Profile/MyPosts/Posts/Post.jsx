@@ -40,7 +40,7 @@ const Post = (props) => {
           <span className={style.date}>{refDate}</span>
           <div className={style.container}>
             <span className={style.like}>{props.likeCount} Like</span>
-            { props.login == props.username && 
+            { props.login === props.username && 
               <button className={style.button} onClick={activateEditMode}>
                 <span className={style.cub}></span>
               </button>
@@ -49,9 +49,9 @@ const Post = (props) => {
 
           { editPanel &&
             <div className={style.panel}>
-              <button className={style.action} onClick={deletePost}>Delete post</button>
+              <button className={style.action} onClick={deletePost}>Удалить</button>
               <span className={style.line}></span>
-              <button className={style.action} onClick={editPost}>Edit post</button>
+              <button className={style.action} onClick={editPost}>Изменить</button>
             </div>
           }
         </div>

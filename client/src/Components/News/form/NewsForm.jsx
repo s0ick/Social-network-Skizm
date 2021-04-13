@@ -15,7 +15,7 @@ class tagsForSearch extends React.Component {
     return (
       <form onSubmit={this.props.handleSubmit} className={style.panelContainer}>
         <div className={style.slick}>
-          <h3 className={style.title}>Tags for searching posts</h3>
+          <h3 className={style.title}>Теги для поиска постов</h3>
           <Field component={Textarea}
             name={"tagsForSearch"}
             type={"text"}
@@ -23,7 +23,7 @@ class tagsForSearch extends React.Component {
             className={style.textarea}
             validate={tagsIsValid}
           />
-          <button className={style.button}>save</button>
+          <button className={style.button}>Сохранить</button>
         </div>
         
       </form>

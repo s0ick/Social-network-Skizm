@@ -19,8 +19,15 @@ const objLinks = {
   Settings
 };
 
+const translate = {
+  Settings: 'Настройки',
+  Profile: 'Профиль',
+  News: 'Новости',
+  Pomodoro: 'Помидорка'
+}
 
-const Navbar = React.memo(({item, isAuth, login}) => {
+
+const Navbar = React.memo(({item, isAuth, login, disabled, blocked}) => {
   const navBarLinks = item
     .map(l => {
       return (
@@ -29,13 +36,13 @@ const Navbar = React.memo(({item, isAuth, login}) => {
             <div className={style.image}>
               <img src={objLinks[l.link]} alt={l.link} />
             </div>
-            <span className={style.text}>{l.link}</span>
+            <span className={style.text}>{translate[l.link]}</span>
           </NavLink>
         </div>
       )
     });
 
-  if(isAuth) {
+  if(isAuth && blocked === false) {
     return (
       <nav className={style.navbar}>
         <div className={style.block}>

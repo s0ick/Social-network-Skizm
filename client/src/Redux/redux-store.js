@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import pomodoroReducer from './Reducer/pomodoroReducer';
 import profileReducer from './Reducer/profileReducer';
 import messageReducer from './Reducer/messageReducer';
 import sideBarReducer from './Reducer/sideBarReducer';
@@ -15,6 +16,7 @@ let reducers = combineReducers({
   SideBar: sideBarReducer,
   UsersPage: usersReducer,
   NewsPage: newsReducer,
+  TomatoPage: pomodoroReducer,
   auth: authReducer,
   app: appReducer,
   form: formReducer

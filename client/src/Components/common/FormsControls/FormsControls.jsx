@@ -46,14 +46,14 @@ export class FieldFileInput extends React.Component{
   }
 
   render(){
-    const { input: { value } } = this.props;
+    // const { input: { value } } = this.props;
     const {input, meta, ...restProps } = this.props;
     return (
       <FormControl {...this.props}>
         <div className={style.block}>
           <label className={style.btnTertiary}>
           <input {...restProps} name={`${input.name}`} onChange={this.onChange} className={style.inputFile} accept={restProps.accept} />
-            <span className={style.icon}><img src={imgIcon} alt="photo"/></span>
+            <span className={style.icon}><img src={imgIcon} alt="post"/></span>
           </label>
         </div>
       </FormControl>
@@ -73,7 +73,7 @@ export class FieldFileInputButton extends React.Component{
   }
 
   render(){
-    const { input: { value } } = this.props;
+    // const { input: { value } } = this.props;
     const {input, meta, ...restProps } = this.props;
     return (
       <FormControl {...this.props}>

@@ -1,10 +1,10 @@
 const initialState = {
   item: [
     {url:'/profile', link: 'Profile'},
-    {url:'/messages', link: 'Messages'},
+    // {url:'/messages', link: 'Messages'},
     {url:'/news', link: 'News'},
-    {url:'/music', link: 'Music'},
-    {url:'/users', link: 'Friends'},
+    // {url:'/music', link: 'Music'},
+    // {url:'/users', link: 'Friends'},
     {url:'/tomato', link: 'Pomodoro'},
     {url:'/settings', link: 'Settings'}
   ]

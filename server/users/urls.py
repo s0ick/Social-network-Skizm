@@ -17,5 +17,7 @@ urlpatterns = [
   url(r'^get_avatar/(?P<username>[0-9a-zA-z]+)$', get_avatar_photo),
   url(r'^get_background/(?P<username>[0-9a-zA-z]+)$', get_background_photo),
 
-  url(r'^tags/(?P<username>[0-9a-zA-z]+)$', tags_action)
+  url(r'^tags/(?P<username>[0-9a-zA-z]+)$', tags_action),
+
+  url(r'^update_tomato/(?P<username>[0-9a-zA-z]+)$', update_tomato),
 ]

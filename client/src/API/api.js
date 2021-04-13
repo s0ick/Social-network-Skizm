@@ -88,6 +88,13 @@ export const ProfileAPI = {
     return Axios
       .put(url, {photo, textBody, tags, username})
       .then(response => response.data)
+  },
+
+  updatePomodoro(username, valueOnline, valueOffline, disabled, blocked, dateBlocked) {
+    const url = `${API_BASE_URL}users/update_tomato/${username}`;
+    return Axios
+      .put(url, {valueOnline, valueOffline, disabled, blocked, dateBlocked})
+      .then(response => response)
   }
 };
 

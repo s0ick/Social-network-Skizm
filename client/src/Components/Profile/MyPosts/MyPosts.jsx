@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from'./MyPosts.module.css';
 import MyPostForm from './Forms/MyPostForm';
 import EditPostForm from './Forms/EditPostForm';
@@ -29,16 +29,15 @@ const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, upd
     setEdit(false);
   };
 
-
   return (
     <div className={style.block}>
       <div className={style.myPostBlock}>
         <h3 className={style.title}>
           {
-            feedName !== null ? feedName : "What's new?"
+            feedName !== null ? feedName : "Что нового?"
           }
         </h3>
-        { login == matchLogin &&
+        { login === matchLogin &&
           (
             fetching ? <div className={style.fetching}><Preloader /></div> : 
               <MyPostForm onSubmit={addNewPost} />
@@ -47,7 +46,7 @@ const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, upd
       </div>
       <div className={style.postsBlock}>
         { 
-          matchLogin == match.params.login && 
+          matchLogin === match.params.login && 
           (
             fetching ? <div className={style.fetching}><Preloader /></div> : 
               <PostsHook 

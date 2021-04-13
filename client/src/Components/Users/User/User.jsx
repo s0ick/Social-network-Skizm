@@ -9,7 +9,7 @@ const User = React.memo((props) => {
       <div className={style.block}>
         <div className={style.leftColumn}>
           <div className={style.avatar}>
-            <img className={style.img} src={props.photo_url !== null ? props.photo_url : userPhoto}/>
+            <img className={style.img} src={props.photo_url !== null ? props.photo_url : userPhoto} alt="ava"/>
           </div>
           <div>
             <button disabled={props.loading.some(id => id === props.id)} id={props.id} onClick={(event) => {props.onFollowChanged(event.target.id, props.followed)}} className={style.button}>{props.followed ? 'Unfollow' : 'Follow'}</button>

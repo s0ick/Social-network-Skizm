@@ -4,6 +4,22 @@ import errorStyle from '../../common/FormsControls/FormControls.module.css';
 import { reduxForm, Field } from 'redux-form';
 import { Input } from '../../common/FormsControls/FormsControls';
 
+const inputs = {
+  aboutMe: 'Обо мне',
+  userStatus: 'Статус',
+  job: 'Работа',
+  country: 'Страна',
+  city: 'Город',
+  feedName: 'Лента',
+  facebook: 'Facebook',
+  my_site: 'Мой сайт',
+  vk: 'VK',
+  twitter: 'Twitter',
+  instagram: 'Instagram',
+  you_tube: 'You tube',
+  git_hub: 'Git hub',
+};
+
 class EditProfileForm extends React.Component {
 
   componentWillMount() {
@@ -30,11 +46,9 @@ class EditProfileForm extends React.Component {
     for(let key in this.props.profile) {
 
       if(key !== 'pk') {
-       let id = `${(key.substring(0, 1).toUpperCase() + key.substring(1)).replace(/_/, ' ')}`;
-   
        let field = (
          <div className={style.inputBlock} key={`${key}`}>
-           <Field component={Input} id={`${id}`} name={`${key}`} type={"text"} className={style.input} autoComplete={"off"} />
+           <Field component={Input} id={`${inputs[key]}`} name={`${key}`} type={"text"} className={style.input} autoComplete={"off"} />
          </div>
        )
        arrayFields.push(field);
@@ -52,7 +66,7 @@ class EditProfileForm extends React.Component {
         
         </div>
         <div className={style.cardAction}>
-          <button className={style.button}>Push</button>
+          <button className={style.button}>Отправить</button>
         </div>
       </form>
      )

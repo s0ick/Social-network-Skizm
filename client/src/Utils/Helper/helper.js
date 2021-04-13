@@ -1,3 +1,8 @@
+const fixInteger = (int) => {
+  if(int < 10) int = `0${int}`;
+  return int;
+};
+
 export const updateObjectInArray = (items, itemId, objectPropName, newObjectProps) => {
   return items.map(u => {
     if(u[objectPropName] === itemId) return {...u, ...newObjectProps};
@@ -25,11 +30,6 @@ export const pushPost = (defaultImage, data, method) => {
 export const formatDate = (date) => {
   const updDate = new Date(date);
 
-  const fixInteger = (int) => {
-    if(int < 10) int = `0${int}`;
-    return int;
-  };
-
   const day = updDate.getDate(),
       hours = updDate.getHours(),
       minute = updDate.getMinutes(),
@@ -39,3 +39,8 @@ export const formatDate = (date) => {
 };
 
 export const uniqueAuthor = (arr) => Array.from(arr.reduce((a, o) => a.set(o.author, o), new Map()).values());
+
+export const checkDate = (deadline) => {
+  let dateNow = new Date();
+  return deadline.getTime() <= dateNow.getTime();
+}; 

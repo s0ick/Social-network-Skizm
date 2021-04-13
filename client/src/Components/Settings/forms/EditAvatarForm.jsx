@@ -20,7 +20,7 @@ const AvatarEditForm = ({handleSubmit, error}) => {
       
       </div>
       <div className={style.cardAction}>
-        <button className={style.button}>Push</button>
+        <button className={style.button}>Отправить</button>
       </div>
       <span className={errorStyle.fromSpanError}>{error} <span className={errorStyle.ellipse}></span></span>
     </form>

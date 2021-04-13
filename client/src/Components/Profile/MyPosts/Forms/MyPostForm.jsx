@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../MyPosts.module.css';
 import { reduxForm, Field } from 'redux-form';
-import { Textarea, FieldFileInput, Input } from '../../../common/FormsControls/FormsControls';
+import { Textarea, FieldFileInput } from '../../../common/FormsControls/FormsControls';
 import { tagsIsValid, required } from '../../../../Utils/Validators/validators';
 
 
@@ -12,7 +12,7 @@ const AddPostForm = ({handleSubmit}) => {
     <div className={style.leftColumn}>
        <Field component={Textarea} 
               name={"postBody"} 
-              placeholder='Write down your thoughts...' 
+              placeholder='Напишите о чем думаете...' 
               className={style.textarea}
               type={"text"}
               autoComplete={"off"}
@@ -20,7 +20,7 @@ const AddPostForm = ({handleSubmit}) => {
        />
        <Field component={Textarea} 
               name={"tags"} 
-              placeholder='#tags...' 
+              placeholder='#Теги...' 
               className={style.textarea}
               type={"text"}
               autoComplete={"off"}
@@ -34,7 +34,7 @@ const AddPostForm = ({handleSubmit}) => {
               type={"file"}
               accept={"image/jpeg, image/png, image/gif"}
        />      
-       <button className={style.button}>Add post</button>
+       <button className={style.button}>Добавить</button>
     </div>
 
   </form>

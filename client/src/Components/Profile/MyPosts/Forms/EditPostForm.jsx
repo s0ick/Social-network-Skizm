@@ -33,10 +33,10 @@ class EditPostForm extends React.Component {
   render () {
     return (
         <form onSubmit={this.props.handleSubmit} className={style.panel}>
-            <h3 className={style.title}>Edit post</h3>
+            <h3 className={style.title}>Редактирование</h3>
             <Field component={Textarea} 
                 name={"postBody"} 
-                placeholder='Write down your thoughts...' 
+                placeholder='Напишите о чем думаете...' 
                 className={style.textarea}
                 type={"text"}
                 autoComplete={"off"}
@@ -44,7 +44,7 @@ class EditPostForm extends React.Component {
             />
             <Field component={Textarea} 
                 name={"tags"} 
-                placeholder='#tags...' 
+                placeholder='#теги...' 
                 className={style.textarea}
                 type={"text"}
                 autoComplete={"off"}
@@ -58,7 +58,8 @@ class EditPostForm extends React.Component {
                             this.state.file : 
                             this.props.post.photoURL
                             } 
-                        className={style.image} />
+                        className={style.image} 
+                        alt="file" />
                     </div>
                     : <></>
             }
@@ -76,7 +77,7 @@ class EditPostForm extends React.Component {
                 autoComplete={"off"}
             />
             <span onClick={() => this.props.setEdit(false)} className={style.close}>&#10006;</span>      
-            <button className={style.button}>update post</button>
+            <button className={style.button}>обновить</button>
 
         </form>
     )
