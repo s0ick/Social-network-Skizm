@@ -77,17 +77,24 @@ class Post(models.Model):
   text = models.TextField("Message")
   tags = models.TextField("Tags")
   author = models.CharField("Author", max_length=100)
-  avatarURL = models.URLField(max_length=255, null=True, blank=True)
+  avatarURL = models.ForeignKey(AvatarPhoto, verbose_name="AvatarURL", on_delete=models.CASCADE, null=True, blank=True)
   backgroundURL = models.ForeignKey(BackgroundPhoto, verbose_name="BackgroundURL", on_delete=models.CASCADE, null=True, blank=True)
   image = models.ImageField("Image", upload_to=upload_path_handler, null=True, blank=True)
   imgURL = models.URLField(max_length=255, null=True, blank=True)
   date = models.DateTimeField(auto_now_add=True, editable=False, null=True, blank=True)
+  likes = models.IntegerField("Like count", default=0)
 
   def getBackground(self):
     try:
       return self.backgroundURL.imgURL
     except:
       return ""
+
+  def getAvatar(self):
+    try:
+      return self.avatarURL.imgURL
+    except:
+      return ""     
 
   @property
   def short_text(self):
@@ -101,3 +108,10 @@ class Post(models.Model):
   
   def __str__(self):
     return self.short_text
+
+class Like(models.Model):
+  post = models.ForeignKey(Post, verbose_name="Post", on_delete=models.CASCADE)
+  username = models.CharField("User", max_length=100)
+
+  def __str__(self):
+    return self.username + " post_id: " + str(self.post.pk)

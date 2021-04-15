@@ -6,15 +6,14 @@ import Preloader from '../../common/Preloader/Preloader';
 import { pushPost } from '../../../Utils/Helper/helper';
 import PostsHook from './Posts/PostsHook';
 
-const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, updatePost, updateFetching, matchLogin, match, avatarPhoto}) => {
+const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, updatePost, likePost, updateFetching, matchLogin, match}) => {
   const [edit, setEdit] = useState(false);
   const [postContent, setPostContent] = useState({});
 
   const addNewPost = (formData) => {
     const { imgForPost, postBody, tags } = formData;
     updateFetching(true);
-    let avatarURL = avatarPhoto;
-    pushPost(imgForPost, {postBody, tags, login, avatarURL}, setPost);
+    pushPost(imgForPost, {postBody, tags, login}, setPost);
   };
 
   const closeModal = (event) => {
@@ -54,6 +53,7 @@ const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, upd
                 deletePost={deletePost} 
                 setEdit={setEdit}
                 setPostContent={setPostContent}
+                likePost={likePost}
                 login={login}
               />
           )

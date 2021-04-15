@@ -57,6 +57,7 @@ export const setMatchLogin = (matchLogin) => ({type: MATCH_LOGIN, matchLogin});
 // THUNK CREATORS
 export const getProfile = (username, login) => async (dispatch) => {
   if(!username) username = login;
+
   await ProfileAPI.getProfile(username)
     .then(response => {
       dispatch(setDisabled(response.disabled));
@@ -66,23 +67,24 @@ export const getProfile = (username, login) => async (dispatch) => {
       dispatch(setDateBlocked(response.date_blocked));
       dispatch(setUserProfile(response));
     });
+
   await ProfileAPI.getAvatarPhoto(username)
     .then(response => {
       dispatch(setAvatarPhoto(response.avatarURL));
     });
+
   await ProfileAPI.getBackgroundPhoto(username, '')
     .then(response => {
       dispatch(setBackgroundPhoto(response.backgroundURL));
     });
 };
+
+
 export const updateProfile = (data, login) => async (dispatch) => {
   const response = await ProfileAPI.updateProfile(data, login);
   dispatch(setUserProfile(response));
 };
-export const setPost = (photo, {postBody, tags, login, avatarURL}) => async (dispatch) => {
-  await ProfileAPI.setPost(photo, postBody, tags, login, avatarURL);
-  dispatch(updateFetching(false));
-};
+
 export const setPhoto = (photo, {login, flag}) => async (dispatch) => {
   const response = await ProfileAPI.setPhoto(photo, login, flag);
   dispatch(updateFetching(false));
@@ -91,12 +93,20 @@ export const setPhoto = (photo, {login, flag}) => async (dispatch) => {
     else dispatch(setBackgroundPhoto(response.data.backgroundURL))  
   }
 };
+
+export const setPost = (photo, {postBody, tags, login}) => async (dispatch) => {
+  await ProfileAPI.setPost(photo, postBody, tags, login);
+  dispatch(updateFetching(false));
+};
 export const deletePost = (id) => async () => {
   await ProfileAPI.deletePost(id);
 };
 export const updatePost = (photo, {postBody, tags, username, id}) => async (dispatch) => {
   await ProfileAPI.updatePost(id, photo, postBody, tags, username)
   dispatch(updateFetching(false));
+};
+export const likePost = (id, username) => async () => {
+  await ProfileAPI.likePost(id, username);
 };
 
 

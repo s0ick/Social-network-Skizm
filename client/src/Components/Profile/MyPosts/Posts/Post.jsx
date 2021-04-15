@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 import style from'./Post.module.css';
 import userImg from '../../../../assets/images/user_null.png';
 import { formatDate } from '../../../../Utils/Helper/helper';
 
 const Post = (props) => {
+  const [ fetching, setFetching ] = useState(true);
   const [ editPanel, setEditPanel ] = useState(false);
+  const [ like, setLike ] = useState(false);
+  const [ likeCount, setLikeCount ] = useState(props.likeCount);
+
+  useEffect(() => {
+    if(fetching) {
+      const url = `http://127.0.0.1:8000/api/reactive/users/check_like/${props.login}?id=${props.pk}`;
+
+      Axios
+        .get(url)
+        .then(response => {
+          if(response.status === 200) {
+            setLike(response.data.flag);
+          }
+        })
+        .finally(() => setFetching(false));
+    }
+  }, [fetching]);
 
   const activateEditMode = () => {
     setEditPanel(prevState => !prevState);
@@ -26,6 +45,14 @@ const Post = (props) => {
     setEditPanel(false);
   };
 
+  const likePost = () => {
+    if(!like) setLikeCount(prevState => ++prevState);
+    else setLikeCount(prevState => --prevState);
+    
+    props.likePost(props.pk, props.login);
+    setLike(prevState => !prevState);
+  };
+
   let refDate = formatDate(props.date);
 
   return (
@@ -39,7 +66,7 @@ const Post = (props) => {
           <span className={style.author}>{props.author}</span>
           <span className={style.date}>{refDate}</span>
           <div className={style.container}>
-            <span className={style.like}>{props.likeCount} Like</span>
+            <span onClick={likePost} className={style.like}>{likeCount} Like</span>
             { props.login === props.username && 
               <button className={style.button} onClick={activateEditMode}>
                 <span className={style.cub}></span>

@@ -38,6 +38,7 @@
 }
 .like {
   font-size: 16px;
+  cursor: pointer;
   color: #64ffda;
 }
 .message {

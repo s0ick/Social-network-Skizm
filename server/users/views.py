@@ -4,9 +4,9 @@ from rest_framework import status
 from rest_framework.views import APIView
 from .serializers import *
 
-from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto
+from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto, Like
 from django.contrib.auth.models import User
-from .service import create_post, create_post_with_image, create_background_or_avatar, update_post_on_id, update_timer
+from .service import create_post, create_post_with_image, create_background_or_avatar, update_post_on_id, update_timer, like_post_on_id
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -20,7 +20,7 @@ def user_registration(request):
     serializer.save()
     user = User.objects.last()
     profile = ProfileUser.objects.create(user = user)
-    profile.tags = "#welcome #to #skizm"
+    profile.tags = "#welcomeToSkizm"
     profile.save()
     return Response(serializer.data, status = status.HTTP_201_CREATED)
   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -86,7 +86,23 @@ def update_post(request, id):
 @api_view(['PUT'])
 def update_tomato(request, username):
   obj = update_timer(request, username)
-  return Response(data=obj, status=status.HTTP_200_OK)  
+  return Response(data=obj, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+def like_post(request, id):
+  like_post_on_id(request, id)
+  return Response(status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def check_like(request, username):
+  post_id = request.GET.get('id')
+  try:
+    like = Like.objects.get(username=username, post__pk=post_id)
+    flag = True
+  except ObjectDoesNotExist:
+    flag = False
+
+  return Response({"flag": flag}, status=status.HTTP_200_OK)  
 
 
 @api_view(['POST'])

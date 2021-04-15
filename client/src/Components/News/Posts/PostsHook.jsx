@@ -47,7 +47,7 @@ const PostsHook = (props) => {
 
       let obj = {
         author: elem.author,
-        avatarURL: elem.avatarURL,
+        avatarURL: elem.getAvatar,
         backgroundURL: elem.getBackground,
         pk: elem.pk,
       };
@@ -73,7 +73,7 @@ const PostsHook = (props) => {
             message={p.text} 
             photoURL={p.imgURL} 
             tags={p.tags} 
-            avatar={p.avatarURL} 
+            avatar={p.getAvatar} 
             author={p.author} 
             date ={p.date}
 

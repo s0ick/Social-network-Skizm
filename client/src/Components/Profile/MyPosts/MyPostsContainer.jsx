@@ -2,7 +2,7 @@ import { updateFetching } from '../../../Redux/Reducer/profileReducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { setPost, deletePost, updatePost } from '../../../Redux/Reducer/profileReducer';
+import { setPost, deletePost, updatePost, likePost } from '../../../Redux/Reducer/profileReducer';
 import { withRouter } from 'react-router-dom';
 
 let mapStateToProps = (state) => {
@@ -10,12 +10,11 @@ let mapStateToProps = (state) => {
     feedName: state.ProfilePage.profile.feedName,
     fetching: state.ProfilePage.fetching,
     login: state.auth.login,
-    avatarPhoto: state.ProfilePage.avatarPhoto,
     matchLogin: state.ProfilePage.matchLogin,
   };
 };
 
 export default compose(
-  connect(mapStateToProps, { setPost, updateFetching, deletePost, updatePost}),
+  connect(mapStateToProps, { setPost, updateFetching, deletePost, updatePost, likePost}),
   withRouter
 )(MyPosts);

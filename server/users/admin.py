@@ -1,9 +1,6 @@
 from django.contrib import admin
-from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto
+from .models import ProfileUser, Post, Like
 from django.utils.safestring import mark_safe
-
-
-# Register your models here.
 
 
 @admin.register(Post)
@@ -16,5 +13,4 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProfileUser)
-admin.site.register(AvatarPhoto)
-admin.site.register(BackgroundPhoto)
+admin.site.register(Like)

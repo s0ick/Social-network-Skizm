@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
-from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto
+from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto, Like
 from django.core.files.base import ContentFile
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -55,7 +55,21 @@ def update_timer(request, username):
     "disabled": profile.disabled,
     "blocked": profile.blocked,
     "dateBlocked": profile.date_blocked
-  }        
+  }
+
+def like_post_on_id(request, id):
+  post = Post.objects.get(pk=id)
+  username = request.data['username']
+
+  try:
+    Like.objects.get(username=username, post__pk=post.pk).delete()
+  except ObjectDoesNotExist:
+    Like.objects.create(post=post, username=username)
+
+  totalCount = Like.objects.filter(post=post).count()
+  
+  post.likes = totalCount
+  post.save()          
 
 def create_background_or_avatar(model, request, media):
   username = request.data['username']
@@ -90,12 +104,6 @@ def _add_image_to_model(model, request, media):
   model.imgURL = model.get_absolute_url_image()
   model.save()
 
-  if media == 'avatar':
-    posts = Post.objects.filter(profile_user=profile)
-    for post in posts:
-      post.avatarURL = model.get_absolute_url_image()
-      post.save()
-
   return model
 
 
@@ -103,14 +111,17 @@ def _create_instance_post(request):
   textBody = request.data['textBody']
   tags = request.data['tags']
   username = request.data['username']
-  avatarURL = request.data['avatarURL']
-
   profile = ProfileUser.objects.get(user__username=username)
 
   try:
     backgroundURL = BackgroundPhoto.objects.get(profile_user=profile)
   except ObjectDoesNotExist:
     backgroundURL = BackgroundPhoto.objects.create(profile_user=profile, image="", imgURL="")
+
+  try:
+    avatarURL = AvatarPhoto.objects.get(profile_user=profile)
+  except ObjectDoesNotExist:
+    avatarURL = AvatarPhoto.objects.create(profile_user=profile, image="", imgURL="")
 
   post = Post.objects.create(profile_user=profile, text=textBody, tags=tags, author=username, avatarURL=avatarURL, backgroundURL=backgroundURL)
   return post

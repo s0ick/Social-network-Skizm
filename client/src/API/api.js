@@ -68,9 +68,9 @@ export const ProfileAPI = {
       .then(response => response.data);
   },
 
-  setPost(photo, textBody, tags, username, avatarURL) {
+  setPost(photo, textBody, tags, username) {
     const url = `${API_BASE_URL}users/add_post/`;
-    return Axios.post(url, {photo, textBody, tags, username, avatarURL});
+    return Axios.post(url, {photo, textBody, tags, username});
   },
 
   setPhoto(photo, username, flag) {
@@ -87,7 +87,14 @@ export const ProfileAPI = {
     const url = `${API_BASE_URL}users/update_post/${id}`;
     return Axios
       .put(url, {photo, textBody, tags, username})
-      .then(response => response.data)
+      .then(response => response.data);
+  },
+
+  likePost(id, username) {
+    const url = `${API_BASE_URL}users/like_post/${id}`;
+    return Axios
+      .put(url, {username})
+      .then(response => response.data);
   },
 
   updatePomodoro(username, valueOnline, valueOffline, disabled, blocked, dateBlocked) {

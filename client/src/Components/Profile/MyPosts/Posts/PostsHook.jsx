@@ -52,14 +52,16 @@ const PostsHook = (props) => {
           message={p.text} 
           photoURL={p.imgURL} 
           tags={p.tags} 
-          avatar={p.avatarURL} 
+          avatar={p.getAvatar} 
           author={p.author} 
           date ={p.date}
+          likeCount={p.likes}
 
-          likeCount="0"
           deletePost={deletePost}
           setEdit={props.setEdit}
           setPostContent={props.setPostContent}
+          likePost={props.likePost}
+
           username={props.username}
           login={props.login}
         />)

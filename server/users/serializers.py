@@ -22,7 +22,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
   getBackground = serializers.ReadOnlyField()
+  getAvatar = serializers.ReadOnlyField()
 
   class Meta:
     model = Post
-    fields = ('pk', 'text', 'tags', 'imgURL', 'author', 'avatarURL', 'getBackground', 'date') 
+    fields = ('pk', 'text', 'tags', 'imgURL', 'author', 'getAvatar', 'getBackground', 'date', 'likes') 
