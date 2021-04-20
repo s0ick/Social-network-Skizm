@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import style from'./Post.module.css';
 import userImg from '../../../../assets/images/user_null.png';
+import { LikeIcon } from '../../../common/Icons/Icons';
 import { formatDate } from '../../../../Utils/Helper/helper';
 
 const Post = (props) => {
@@ -66,7 +67,7 @@ const Post = (props) => {
           <span className={style.author}>{props.author}</span>
           <span className={style.date}>{refDate}</span>
           <div className={style.container}>
-            <span onClick={likePost} className={style.like}>{likeCount} Like</span>
+            
             { props.login === props.username && 
               <button className={style.button} onClick={activateEditMode}>
                 <span className={style.cub}></span>
@@ -87,6 +88,18 @@ const Post = (props) => {
         }
         <p className={style.message}>{props.message}</p>
         <p className={style.tags}>{props.tags}</p>
+
+        <div className={style.footer}>
+          <span onClick={likePost} className={style.like}>
+            {likeCount}
+            <LikeIcon 
+              width={18} 
+              height={18} 
+              fill={like ? '#ff1744': 'none'} 
+              stroke={like? '#ff1744' : '#acacac'} 
+            />
+          </span>
+        </div>
       </div>
     </div>
   )

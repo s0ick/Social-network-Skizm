@@ -1,6 +1,6 @@
 import React from 'react';
+import { LogoutIcon } from '../common/Icons/Icons';
 import logo from '../../assets/images/header/logo.png';
-import logout from '../../assets/images/header/logout.svg';
 import style from './Header.module.css';
 
 const Header = React.memo(({isAuth, authLogout}) => {
@@ -12,7 +12,7 @@ const Header = React.memo(({isAuth, authLogout}) => {
         {
           isAuth ? 
             <button onClick={authLogout} className={style.button}>
-              <img src={logout} alt="logout" className={style.image}/>
+              <LogoutIcon width={30} height={30} fill= "#64ffda" stroke= "#000000"/>
             </button> : 
           <></>
         }

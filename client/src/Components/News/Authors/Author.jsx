@@ -2,7 +2,7 @@ import React from 'react';
 import style from '../News.module.css';
 import userDef from '../../../assets/images/user_null.png';
 import backgroundDef from '../../../assets/images/bg_null-2.jpg';
-import sub from '../../../assets/images/subscribe.svg';
+import { ArrowIcon } from '../../common/Icons/Icons';
 import { NavLink } from 'react-router-dom';
 
 const Author = (props) => {
@@ -28,7 +28,7 @@ const Author = (props) => {
 
 
       <NavLink to={`/profile/${props.author}`} className={style.button}>
-        <img src={sub} alt="subscribe"/>
+        <ArrowIcon width={22} height={22} fill="#64ffda" stroke="#000000"/>
       </NavLink>
 
       <div className={style.background}>

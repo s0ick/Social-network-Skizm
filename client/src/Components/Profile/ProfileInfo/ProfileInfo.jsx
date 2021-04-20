@@ -5,32 +5,33 @@ import ProfileStatus from './ProfileHelper/ProfileStatus';
 import defaultUserImg from '../../../assets/images/user_null.png';
 import defaultBgImg from '../../../assets/images/bg_null.jpg';
 
-import FaceBook from '../../../assets/images/contacts/facebook.svg';
-import VK from '../../../assets/images/contacts/vk.svg';
-import YouTube from '../../../assets/images/contacts/youtube.svg';
-import GitHub from '../../../assets/images/contacts/github.svg';
-import Instagram from '../../../assets/images/contacts/inst.svg';
-import WebSite from '../../../assets/images/contacts/website.svg';
-import Twitter from '../../../assets/images/contacts/twitter.svg';
+import { FacebookIcon, VkIcon, InstIcon, YouTubeIcon, GitHubIcon, WebSiteIcon, TwitterIcon } from '../../common/Icons/Icons';
+
+const args = {
+  width: 30,
+  height: 30,
+  fill: "#64ffda",
+  stroke: "#000000"
+};
 
 const ProfileInfo = React.memo(({props}) => {
   let profile = props.profile;  
 
   const Links = [];
   if(!!profile.facebook) 
-    Links.push(<a href={`${profile.facebook}`} className={style.link}><img src={FaceBook} alt="FaceBook"/></a>)
+    Links.push(<a href={`${profile.facebook}`} className={style.link}><FacebookIcon {...args} /></a>)
   if(!!profile.website) 
-    Links.push(<a href={`${profile.my_site}`} className={style.link}><img src={WebSite} alt="WebSite"/></a>)
+    Links.push(<a href={`${profile.my_site}`} className={style.link}><WebSiteIcon {...args} /></a>)
   if(!!profile.vk) 
-    Links.push(<a href={`${profile.vk}`} className={style.link}><img src={VK} alt="VK"/></a>)
+  Links.push(<a href={`${profile.vk}`} className={style.link}><VkIcon {...args} /></a>)
   if(!!profile.twitter) 
-    Links.push(<a href={`${profile.twitter}`} className={style.link}><img src={Twitter} alt="Twitter"/></a>)
+    Links.push(<a href={`${profile.twitter}`} className={style.link}><TwitterIcon {...args} /></a>)
   if(!!profile.instagram) 
-    Links.push(<a href={`${profile.instagram}`} className={style.link}><img src={Instagram} alt="Instagram"/></a>)
+    Links.push(<a href={`${profile.instagram}`} className={style.link}><InstIcon {...args} /></a>)
   if(!!profile.youtube) 
-    Links.push(<a href={`${profile.you_tube}`} className={style.link}><img src={YouTube} alt="YouTube"/></a>)
-  if(!!profile.github) 
-    Links.push(<a href={`${profile.git_hub}`} className={style.link}><img src={GitHub} alt="GitHub"/></a>)
+    Links.push(<a href={`${profile.you_tube}`} className={style.link}><YouTubeIcon {...args} /></a>)
+  if(!!profile.git_hub) 
+    Links.push(<a href={`${profile.git_hub}`} className={style.link}><GitHubIcon {...args} /></a>)
   
 
   return (

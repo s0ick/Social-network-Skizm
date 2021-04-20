@@ -1,0 +1,16 @@
+.like {
+  margin-left: 5px;
+}
+
+.hover {
+  transition: .2s;
+}
+
+.hover:hover {
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 3px #64ffda)
+}
+
+.downloadImg {
+  cursor: pointer;
+}

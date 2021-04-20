@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './FormControls.module.css';
-import imgIcon from '../../../assets/images/imgIcon.svg';
+import { DownloadImgIcon } from '../Icons/Icons';
 
 const FormControl = ({input, meta: {touched, error}, ...props}) => {
   const hasError = touched && error;
@@ -46,14 +46,13 @@ export class FieldFileInput extends React.Component{
   }
 
   render(){
-    // const { input: { value } } = this.props;
     const {input, meta, ...restProps } = this.props;
     return (
       <FormControl {...this.props}>
         <div className={style.block}>
           <label className={style.btnTertiary}>
           <input {...restProps} name={`${input.name}`} onChange={this.onChange} className={style.inputFile} accept={restProps.accept} />
-            <span className={style.icon}><img src={imgIcon} alt="post"/></span>
+            <span className={style.icon}><DownloadImgIcon width={25} height={25} fill={"#acacac"} stroke="#000000" /></span>
           </label>
         </div>
       </FormControl>
@@ -73,7 +72,6 @@ export class FieldFileInputButton extends React.Component{
   }
 
   render(){
-    // const { input: { value } } = this.props;
     const {input, meta, ...restProps } = this.props;
     return (
       <FormControl {...this.props}>
