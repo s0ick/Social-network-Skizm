@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProfileUser, Post, Like
+from .models import ProfileUser, Post, Comment, AvatarPhoto
 from django.utils.safestring import mark_safe
 
 
@@ -13,4 +13,5 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProfileUser)
-admin.site.register(Like)
+admin.site.register(Comment)
+admin.site.register(AvatarPhoto)

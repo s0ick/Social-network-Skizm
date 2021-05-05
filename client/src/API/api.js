@@ -102,6 +102,13 @@ export const ProfileAPI = {
     return Axios
       .put(url, {valueOnline, valueOffline, disabled, blocked, dateBlocked})
       .then(response => response)
+  },
+
+  commentPost(id, username, comment) {
+    const url = `${API_BASE_URL}users/add_comment_post_on_id/${id}`;
+    return Axios
+      .post(url, {username, comment})
+      .then(response => response);
   }
 };
 

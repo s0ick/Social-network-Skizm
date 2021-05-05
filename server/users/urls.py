@@ -16,6 +16,9 @@ urlpatterns = [
   url(r'^like_post/(?P<id>[0-9]+)$', like_post),
   url(r'^check_like/(?P<username>[0-9a-zA-z]+)$', check_like),
 
+  url(r'^add_comment_post_on_id/(?P<id>[0-9]+)$', add_comment_post),
+  url(r'^get_comment_post_on_id/(?P<id>[0-9]+)$', get_comments_for_post),
+
   url('add_photos/', add_avatar_or_back_photo),
   url(r'^get_avatar/(?P<username>[0-9a-zA-z]+)$', get_avatar_photo),
   url(r'^get_background/(?P<username>[0-9a-zA-z]+)$', get_background_photo),

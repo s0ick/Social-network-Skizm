@@ -76,10 +76,15 @@ const PostsHook = (props) => {
             avatar={p.getAvatar} 
             author={p.author} 
             date ={p.date}
+            likeCount={p.likes}
+            commentCount={p.comments}
 
-            likeCount="0"
+            likePost={props.likePost}
+            commentPost={props.commentPost}
+
             username={props.username} 
-            login={props.login} 
+            login={props.login}
+            avatarPhoto={props.avatarPhoto} 
           />)
       }
     </div>

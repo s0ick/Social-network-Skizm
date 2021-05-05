@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
-from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto, Like
+from .models import *
 from django.core.files.base import ContentFile
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -69,7 +69,27 @@ def like_post_on_id(request, id):
   totalCount = Like.objects.filter(post=post).count()
   
   post.likes = totalCount
-  post.save()          
+  post.save()
+
+
+def comment_post_on_id(request, id):
+  post = Post.objects.get(pk=id)
+  username = request.data['username']
+  message = request.data['comment']
+
+  profile = ProfileUser.objects.get(user__username=username)
+  
+  try:
+    avatarURL = AvatarPhoto.objects.get(profile_user=profile)
+  except ObjectDoesNotExist:
+    avatarURL = AvatarPhoto.objects.create(profile_user=profile, image="", imgURL="")
+
+  Comment.objects.create(post=post, username=username, message=message, avatarURL=avatarURL)
+  totalCount = Comment.objects.filter(post=post).count()
+  post.comments = totalCount
+  post.save()
+
+
 
 def create_background_or_avatar(model, request, media):
   username = request.data['username']

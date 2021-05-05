@@ -6,7 +6,7 @@ import Preloader from '../../common/Preloader/Preloader';
 import { pushPost } from '../../../Utils/Helper/helper';
 import PostsHook from './Posts/PostsHook';
 
-const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, updatePost, likePost, updateFetching, matchLogin, match}) => {
+const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, updatePost, likePost, commentPost, updateFetching, matchLogin, match}) => {
   const [edit, setEdit] = useState(false);
   const [postContent, setPostContent] = useState({});
 
@@ -54,6 +54,7 @@ const MyPosts = React.memo(({feedName, fetching, login, setPost, deletePost, upd
                 setEdit={setEdit}
                 setPostContent={setPostContent}
                 likePost={likePost}
+                commentPost={commentPost}
                 login={login}
               />
           )

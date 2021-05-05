@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import style from'./Post.module.css';
 import userImg from '../../../../assets/images/user_null.png';
-import { LikeIcon } from '../../../common/Icons/Icons';
+import { LikeIcon, CommentIcon } from '../../../common/Icons/Icons';
 import { formatDate } from '../../../../Utils/Helper/helper';
+import CommentHook from './Comment/CommentHook';
 
 const Post = (props) => {
   const [ fetching, setFetching ] = useState(true);
-  const [ editPanel, setEditPanel ] = useState(false);
   const [ like, setLike ] = useState(false);
   const [ likeCount, setLikeCount ] = useState(props.likeCount);
+  const [ commentCount, setCommentCount ] = useState(props.commentCount);
+  const [ commentPanel, setCommentPanel ] = useState(false);
 
   useEffect(() => {
     if(fetching) {
@@ -26,13 +28,9 @@ const Post = (props) => {
     }
   }, [fetching]);
 
-  const activateEditMode = () => {
-    setEditPanel(prevState => !prevState);
-  };
 
   const deletePost = () => {
     props.deletePost(props.pk);
-    setEditPanel(false);
   };
 
   const editPost = () => {
@@ -43,7 +41,6 @@ const Post = (props) => {
       tags: props.tags,
       photoURL: props.photoURL
     });
-    setEditPanel(false);
   };
 
   const likePost = () => {
@@ -54,53 +51,71 @@ const Post = (props) => {
     setLike(prevState => !prevState);
   };
 
-  let refDate = formatDate(props.date);
+  const sendComment = (value) => {
+    setCommentCount(prevState => ++prevState);
+    props.commentPost(props.pk, props.login, value);
+  };
 
   return (
     <div className={style.item} id={`post_id_${props.pk}`}>
-      <div className={style.ava}>
-        <img className={style.img} src={!!props.avatar ? props.avatar : userImg} alt="ava"/>
-      </div>
-        
-      <div className={style.content}>
-        <div className={style.mainLine}>
-          <span className={style.author}>{props.author}</span>
-          <span className={style.date}>{refDate}</span>
-          <div className={style.container}>
-            
-            { props.login === props.username && 
-              <button className={style.button} onClick={activateEditMode}>
-                <span className={style.cub}></span>
-              </button>
-            }
+      <div className={style.row}>
+        <div className={style.left}>
+          <div className={style.ava}>
+            <img className={style.img} src={!!props.avatar ? props.avatar : userImg} alt="ava"/>
           </div>
-
-          { editPanel &&
-            <div className={style.panel}>
+          <span className={style.author}>{props.author}</span>
+        </div>
+        
+        <div className={style.right}>
+          { props.login === props.username && 
+            <div className={style.container}>
               <button className={style.action} onClick={deletePost}>Удалить</button>
-              <span className={style.line}></span>
               <button className={style.action} onClick={editPost}>Изменить</button>
             </div>
           }
         </div>
+      </div>
+        
+      <div className={style.content}>
         {
           props.photoURL && <div className={style.parent}><img src={props.photoURL} alt={`img_post_${props.pk}`} className={style.image} /></div>
         }
+
         <p className={style.message}>{props.message}</p>
         <p className={style.tags}>{props.tags}</p>
 
         <div className={style.footer}>
-          <span onClick={likePost} className={style.like}>
-            {likeCount}
-            <LikeIcon 
-              width={18} 
-              height={18} 
-              fill={like ? '#ff1744': 'none'} 
-              stroke={like? '#ff1744' : '#acacac'} 
-            />
-          </span>
+
+          <span className={style.date}>{formatDate(props.date)}</span>
+
+          <div className={style.actions}>
+            <span onClick={() => setCommentPanel(prevState => !prevState)} className={style.comment}>
+              {commentCount}
+              <CommentIcon 
+                width={18} 
+                height={18} 
+                fill={'#acacac'} 
+                stroke={'#acacac'} 
+              />
+            </span>
+            <span onClick={likePost} className={style.like}>
+              {likeCount}
+              <LikeIcon 
+                width={18} 
+                height={18} 
+                fill={like ? '#ff1744': 'none'} 
+                stroke={like? '#ff1744' : '#acacac'} 
+              />
+            </span>
+          </div>
+
         </div>
-      </div>
+
+        { 
+          commentPanel && <CommentHook id={props.pk} sendComment={sendComment} login={props.login} />
+        }
+
+      </div>  
     </div>
   )
 }

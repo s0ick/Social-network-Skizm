@@ -83,6 +83,7 @@ class Post(models.Model):
   imgURL = models.URLField(max_length=255, null=True, blank=True)
   date = models.DateTimeField(auto_now_add=True, editable=False, null=True, blank=True)
   likes = models.IntegerField("Like count", default=0)
+  comments = models.IntegerField("Comment count", default=0)
 
   def getBackground(self):
     try:
@@ -112,6 +113,22 @@ class Post(models.Model):
 class Like(models.Model):
   post = models.ForeignKey(Post, verbose_name="Post", on_delete=models.CASCADE)
   username = models.CharField("User", max_length=100)
+
+  def __str__(self):
+    return self.username + " post_id: " + str(self.post.pk)
+
+class Comment(models.Model):
+  post = models.ForeignKey(Post, verbose_name="Post", on_delete=models.CASCADE)
+  username = models.CharField("User", max_length=100)
+  message = models.TextField("Comment")
+  avatarURL = models.ForeignKey(AvatarPhoto, verbose_name="AvatarURL", on_delete=models.CASCADE, null=True, blank=True)
+  date = models.DateTimeField(auto_now_add=True, editable=False)
+
+  def getAvatarCommentator(self):
+    try:
+      return self.avatarURL.imgURL
+    except:
+      return "" 
 
   def __str__(self):
     return self.username + " post_id: " + str(self.post.pk)

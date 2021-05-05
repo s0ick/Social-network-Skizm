@@ -5,7 +5,7 @@ import PostsHook from './Posts/PostsHook';
 import NewsForm from './form/NewsForm';
 import Author from './Authors/Author';
 
-const News =  React.memo(({fetching, tags, authors, username, updateFetching, updateTags, setAuthor, match}) => {
+const News =  React.memo(({fetching, tags, authors, username, updateFetching, updateTags, setAuthor, likePost, commentPost, match}) => {
   const onSubmit = (formData) => {
     updateFetching(true);
     const { tagsForSearch } = formData;
@@ -19,7 +19,7 @@ const News =  React.memo(({fetching, tags, authors, username, updateFetching, up
       {
         fetching ? 
         <div className={style.fetching}><Preloader /></div> : 
-        <PostsHook tags={tags} setAuthor={setAuthor} username={match.params.login} login={username} />
+        <PostsHook tags={tags} setAuthor={setAuthor} username={match.params.login} login={username} likePost={likePost} commentPost={commentPost} />
       }
       <NewsForm onSubmit={onSubmit} tags={tags} />
       <div className={style.container}>

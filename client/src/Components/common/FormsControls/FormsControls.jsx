@@ -23,7 +23,9 @@ export const Input = (props) => {
   const {input, meta, defaultValue, ...restProps} = props;
   return <FormControl {...props}>
            <input {...input} {...restProps}/>
-           <label htmlFor={props.id}>{props.id}:</label>
+           { props.id &&
+              <label htmlFor={props.id}>{props.id}:</label>
+           }
          </FormControl>
 };
 

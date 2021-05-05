@@ -4,9 +4,9 @@ from rest_framework import status
 from rest_framework.views import APIView
 from .serializers import *
 
-from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto, Like
+from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto, Like, Comment
 from django.contrib.auth.models import User
-from .service import create_post, create_post_with_image, create_background_or_avatar, update_post_on_id, update_timer, like_post_on_id
+from .service import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -78,20 +78,28 @@ def delete_post(request, id):
   post.delete()
   return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 @api_view(['PUT'])
 def update_post(request, id):
   update_post_on_id(request, id)
   return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['PUT'])
 def update_tomato(request, username):
   obj = update_timer(request, username)
   return Response(data=obj, status=status.HTTP_200_OK)
 
+
 @api_view(['PUT'])
 def like_post(request, id):
   like_post_on_id(request, id)
   return Response(status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def add_comment_post(request, id):
+  comment_post_on_id(request, id)
+  return Response(status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
 def check_like(request, username):
@@ -233,3 +241,33 @@ def get_posts_for_feed(request):
   return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages})  
 
 
+@api_view(['GET'])
+def get_comments_for_post(request, id):
+
+  try:
+    post = Post.objects.get(pk=id)
+  except ObjectDoesNotExist:
+    return Response(status=status.HTTP_404_NOT_FOUND)
+
+  data = []
+  nextPage = 1
+  previousPage = 1
+  comments = Comment.objects.filter(post=post)
+  page = request.GET.get('page', 1)
+  paginator = Paginator(comments, 8)
+
+  try:
+    data = paginator.page(page)
+  except PageNotAnInteger:
+    data = paginator.page(1)
+  except EmptyPage:
+    data = paginator.page(paginator.num_pages)
+
+  serializer = CommentSerializer(data, context={'request': request}, many=True)
+
+  if data.has_next():
+    nextPage = data.next_page_number()
+  if data.has_previous():
+    previousPage = data.previous_page_number()
+
+  return Response({'data': serializer.data , 'count': paginator.count})  

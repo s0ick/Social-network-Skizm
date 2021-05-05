@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../MyPosts.module.css';
+import style from './Forms.module.css';
 import { reduxForm, Field } from 'redux-form';
 import { Textarea, FieldFileInput } from '../../../common/FormsControls/FormsControls';
 import { tagsIsValid, required } from '../../../../Utils/Validators/validators';
@@ -7,13 +7,13 @@ import { tagsIsValid, required } from '../../../../Utils/Validators/validators';
 
 const AddPostForm = ({handleSubmit}) => {
  return (
-  <form onSubmit={handleSubmit} className={style.panel}>
+  <form onSubmit={handleSubmit} className={style.panelRow}>
 
     <div className={style.leftColumn}>
        <Field component={Textarea} 
               name={"postBody"} 
               placeholder='Напишите о чем думаете...' 
-              className={style.textarea}
+              className={style.textareaBig}
               type={"text"}
               autoComplete={"off"}
               validate={required}
@@ -21,7 +21,7 @@ const AddPostForm = ({handleSubmit}) => {
        <Field component={Textarea} 
               name={"tags"} 
               placeholder='#Теги...' 
-              className={style.textarea}
+              className={style.textareaBig}
               type={"text"}
               autoComplete={"off"}
               validate={[required, tagsIsValid]}

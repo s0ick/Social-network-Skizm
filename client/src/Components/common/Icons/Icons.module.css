@@ -1,5 +1,9 @@
-.like {
-  margin-left: 5px;
+.like, .comment {
+  margin-left: 8px;
+}
+
+.comment {
+  margin-right: 15px;
 }
 
 .hover {

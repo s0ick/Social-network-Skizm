@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './EditPosts.module.css';
+import style from './Forms.module.css';
 import { reduxForm, Field } from 'redux-form';
 import { Textarea, FieldFileInputButton, Hidden } from '../../../common/FormsControls/FormsControls';
 import { tagsIsValid, required } from '../../../../Utils/Validators/validators';
@@ -32,12 +32,12 @@ class EditPostForm extends React.Component {
 
   render () {
     return (
-        <form onSubmit={this.props.handleSubmit} className={style.panel}>
+        <form onSubmit={this.props.handleSubmit} className={style.panelColumn}>
             <h3 className={style.title}>Редактирование</h3>
             <Field component={Textarea} 
                 name={"postBody"} 
                 placeholder='Напишите о чем думаете...' 
-                className={style.textarea}
+                className={style.textareaSmall}
                 type={"text"}
                 autoComplete={"off"}
                 validate={required}
@@ -45,7 +45,7 @@ class EditPostForm extends React.Component {
             <Field component={Textarea} 
                 name={"tags"} 
                 placeholder='#теги...' 
-                className={style.textarea}
+                className={style.textareaSmall}
                 type={"text"}
                 autoComplete={"off"}
                 validate={[required, tagsIsValid]}

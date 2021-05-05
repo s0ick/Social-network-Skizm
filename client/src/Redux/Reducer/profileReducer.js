@@ -108,6 +108,9 @@ export const updatePost = (photo, {postBody, tags, username, id}) => async (disp
 export const likePost = (id, username) => async () => {
   await ProfileAPI.likePost(id, username);
 };
+export const commentPost = (id, username, comment) => async () => {
+  await ProfileAPI.commentPost(id, username, comment);
+}
 
 
 
