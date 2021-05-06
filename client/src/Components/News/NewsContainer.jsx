@@ -3,7 +3,7 @@ import News from './News';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { likePost, commentPost } from '../../Redux/Reducer/profileReducer';
+import { likePost, commentPost } from '../../Redux/Reducer/postReducer';
 
 let mapStateToProps = (state) => {
   return {

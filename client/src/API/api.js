@@ -2,27 +2,6 @@ import * as Axios from 'axios';
 
 const API_BASE_URL = 'http://127.0.0.1:8000/api/reactive/';
 
-export const UserAPI = {
-  // getUsers(currentPage, pageSize) {
-  //   return instance
-  //     .get(`users?page=${currentPage}&count=${pageSize}`)
-  //     .then(response => response.data);
-  // }
-};
-
-export const FollowedAPI = {
-  // followed(id) {
-  //   return instance
-  //     .post(`follow/${id}`)
-  //     .then(response => response.data);
-  // },
-  // unFollowed(id) {
-  //   return instance
-  //     .delete(`follow/${id}`)
-  //     .then(response => response.data);
-  // }
-};
-
 export const NewsAPI = {
   getTags(username) {
     const url = `${API_BASE_URL}users/tags/${username}`;
@@ -68,14 +47,16 @@ export const ProfileAPI = {
       .then(response => response.data);
   },
 
-  setPost(photo, textBody, tags, username) {
-    const url = `${API_BASE_URL}users/add_post/`;
-    return Axios.post(url, {photo, textBody, tags, username});
-  },
-
   setPhoto(photo, username, flag) {
     const url = `${API_BASE_URL}users/add_photos/`;
     return Axios.post(url, {photo, username, flag});
+  },
+};
+
+export const PostAPI = {
+  setPost(photo, textBody, tags, username) {
+    const url = `${API_BASE_URL}users/add_post/`;
+    return Axios.post(url, {photo, textBody, tags, username});
   },
 
   deletePost(id) {
@@ -96,21 +77,22 @@ export const ProfileAPI = {
       .put(url, {username})
       .then(response => response.data);
   },
-
-  updatePomodoro(username, valueOnline, valueOffline, disabled, blocked, dateBlocked) {
-    const url = `${API_BASE_URL}users/update_tomato/${username}`;
-    return Axios
-      .put(url, {valueOnline, valueOffline, disabled, blocked, dateBlocked})
-      .then(response => response)
-  },
-
   commentPost(id, username, comment) {
     const url = `${API_BASE_URL}users/add_comment_post_on_id/${id}`;
     return Axios
       .post(url, {username, comment})
       .then(response => response);
   }
-};
+}
+
+export const TimerAPI = {
+  updatePomodoro(username, valueOnline, valueOffline, blocked, dateBlocked) {
+    const url = `${API_BASE_URL}users/update_tomato/${username}`;
+    return Axios
+      .put(url, {valueOnline, valueOffline, blocked, dateBlocked})
+      .then(response => response)
+  },
+}
 
 export const AuthAPI = {
   registration(newUser) {

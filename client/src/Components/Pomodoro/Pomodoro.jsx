@@ -7,7 +7,7 @@ const Pomodoro = React.memo((props) => {
   return (
     <div className={style.tomato}>
       <h1 className={style.title}>Техника "Помидорка"</h1>
-      <p className={style.description}>Помидорка - это техника управления временем. Сеть Skizm использует её для помощи в контроле времени провождения в приложении. Она поможет вам сделать перерыв в виртуальной жизни и вернуться в реальную жизнь к своим заботам. Если же у вас нет подобных проблем, то прото отключите функцию блокировки.</p>
+      <p className={style.description}>Помидорка - это техника управления временем. Skizm использует её для помощи в контроле времени провождения в приложении. Она поможет вам сделать перерыв в виртуальной жизни и вернуться в реальную жизнь к своим заботам.</p>
 
       <div className={style.block}>
         <div className={style.column}>
@@ -28,7 +28,6 @@ const Pomodoro = React.memo((props) => {
             progressWidth={6}
             knobRadius={10}
             shadow="true"
-            disabled={props.disabled}
           />
 
           <span className="min">В мин</span>
@@ -52,7 +51,6 @@ const Pomodoro = React.memo((props) => {
             progressWidth={6}
             knobRadius={10}
             shadow="true"
-            disabled={props.disabled}
           />
 
           <span className="min">В мин</span>
@@ -61,10 +59,6 @@ const Pomodoro = React.memo((props) => {
       </div>
 
       <div className={style.footer}>
-        <label className={style.label}>
-          <input checked={props.disabled} onChange={(event) => props.disabledChange(event.target.checked)} className={style.checkbox} type="checkbox" name="disabled" id="disabled"/>
-          <span className={style.disabled}>Отключить таймер</span>
-        </label>
         <button onClick={props.saveTimer} className={style.button}>Сохранить</button>
       </div>
     </div>

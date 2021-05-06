@@ -9,7 +9,7 @@ const Blocked = React.memo((props) => {
       <h1 className={style.title}>{message}</h1>
       <div className={style.timer}>
         <h1 className={style.text}>До конца блокировки:</h1>
-        <Timer updateState={props.updateState} activate={props.activate} props={props.props} />
+        <Timer updatePomodoro={props.updatePomodoro} activate={props.activate} props={props.props} />
       </div>
 
       <div className={style.animate}>

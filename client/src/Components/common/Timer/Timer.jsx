@@ -29,10 +29,10 @@ const Timer = (props) => {
       } else {
         props.activate(false);
 
-        const { username, valueOnline, valueOffline, disabled } = props.props;
+        const { username, valueOnline, valueOffline } = props.props;
         let dateBlocked = new Date().getTime() + new Date((valueOnline + valueOffline) * 60000).getTime();
 
-        props.updateState(username, valueOnline, valueOffline, disabled, false, new Date(dateBlocked));
+        props.updatePomodoro(username, valueOnline, valueOffline, false, new Date(dateBlocked));
         clearInterval(interval);
       }
     }, 1000);

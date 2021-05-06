@@ -44,7 +44,6 @@ def update_timer(request, username):
   profile = ProfileUser.objects.get(user=user) 
   profile.valueOnline = request.data['valueOnline']
   profile.valueOffline = request.data['valueOffline']
-  profile.disabled = request.data['disabled']
   profile.blocked = request.data['blocked']
   profile.date_blocked = request.data['dateBlocked']
   profile.save()
@@ -52,10 +51,21 @@ def update_timer(request, username):
   return {
     "valueOnline": profile.valueOnline,
     "valueOffline": profile.valueOffline,
-    "disabled": profile.disabled,
     "blocked": profile.blocked,
     "dateBlocked": profile.date_blocked
   }
+
+def update_timer_rest_time(request, username):
+
+  try:
+    user = User.objects.get(username=username)
+  except ObjectDoesNotExist:
+    return Response(status=status.HTTP_404_NOT_FOUND)
+
+  profile = ProfileUser.objects.get(user=user)
+  profile.rest_of_time = request.data['restOfTime']
+  profile.save()
+
 
 def like_post_on_id(request, id):
   post = Post.objects.get(pk=id)

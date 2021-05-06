@@ -29,9 +29,9 @@ class ProfileUser(models.Model):
   tags = models.TextField("Tags", null=True, blank=True)
   valueOnline = models.IntegerField("Time in online", default=20)
   valueOffline = models.IntegerField("Time in offline", default=5)
-  disabled = models.BooleanField("Blocked timer", default=False)
   blocked = models.BooleanField("Blocked app", default=False)
   date_blocked = models.DateTimeField(auto_now_add=False, editable=True, null=True, blank=True)
+  rest_of_time = models.DateTimeField(auto_now_add=False, editable=True, null=True, blank=True)
 
   def __str__(self):
     return self.user.username

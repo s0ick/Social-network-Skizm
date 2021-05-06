@@ -1,5 +1,5 @@
 import { ProfileAPI } from '../../API/api';
-import { setValueOnline, setValueOffline, setDisabled, setBlocked, setDateBlocked } from './pomodoroReducer';
+import { setValueOnline, setValueOffline, setBlocked, setDateBlocked } from './pomodoroReducer';
 
 const FETCHING = 'Profile/FETCHING',
       AVATAR_PHOTO = 'Profile/AVATAR_PHOTO',
@@ -60,7 +60,6 @@ export const getProfile = (username, login) => async (dispatch) => {
 
   await ProfileAPI.getProfile(username)
     .then(response => {
-      dispatch(setDisabled(response.disabled));
       dispatch(setBlocked(response.blocked));
       dispatch(setValueOnline(response.valueOnline));
       dispatch(setValueOffline(response.valueOffline));
@@ -93,25 +92,6 @@ export const setPhoto = (photo, {login, flag}) => async (dispatch) => {
     else dispatch(setBackgroundPhoto(response.data.backgroundURL))  
   }
 };
-
-export const setPost = (photo, {postBody, tags, login}) => async (dispatch) => {
-  await ProfileAPI.setPost(photo, postBody, tags, login);
-  dispatch(updateFetching(false));
-};
-export const deletePost = (id) => async () => {
-  await ProfileAPI.deletePost(id);
-};
-export const updatePost = (photo, {postBody, tags, username, id}) => async (dispatch) => {
-  await ProfileAPI.updatePost(id, photo, postBody, tags, username)
-  dispatch(updateFetching(false));
-};
-export const likePost = (id, username) => async () => {
-  await ProfileAPI.likePost(id, username);
-};
-export const commentPost = (id, username, comment) => async () => {
-  await ProfileAPI.commentPost(id, username, comment);
-}
-
 
 
 export default profileReducer;

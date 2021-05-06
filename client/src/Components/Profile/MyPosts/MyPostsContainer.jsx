@@ -1,8 +1,7 @@
-import { updateFetching } from '../../../Redux/Reducer/profileReducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { setPost, deletePost, updatePost, likePost, commentPost } from '../../../Redux/Reducer/profileReducer';
+import { setPost, deletePost, updatePost, likePost, commentPost, updateFetching } from '../../../Redux/Reducer/postReducer';
 import { withRouter } from 'react-router-dom';
 
 let mapStateToProps = (state) => {

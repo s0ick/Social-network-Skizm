@@ -92,6 +92,12 @@ def update_tomato(request, username):
 
 
 @api_view(['PUT'])
+def update_tomato_rest_time(request, username):
+  obj = update_timer_rest_time(request, username)
+  return Response(data=obj, status=status.HTTP_200_OK)
+
+
+@api_view(['PUT'])
 def like_post(request, id):
   like_post_on_id(request, id)
   return Response(status=status.HTTP_200_OK)
