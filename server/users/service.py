@@ -34,37 +34,50 @@ def update_post_on_id(request, id):
     post.tags = request.data['tags']
   post.save()
 
+def get_timer(request, username):
+  profile = ProfileUser.objects.get(user__username=username)
+
+  try:
+    timer = Timer.objects.get(profile_user=profile)
+  except ObjectDoesNotExist:
+    timer = Timer.objects.create(profile_user=profile)
+
+  return timer
+
 def update_timer(request, username):
   
-  try:
-    user = User.objects.get(username=username)
-  except ObjectDoesNotExist:
-    return Response(status=status.HTTP_404_NOT_FOUND)
+  profile = ProfileUser.objects.get(user__username=username)
 
-  profile = ProfileUser.objects.get(user=user) 
-  profile.valueOnline = request.data['valueOnline']
-  profile.valueOffline = request.data['valueOffline']
-  profile.blocked = request.data['blocked']
-  profile.date_blocked = request.data['dateBlocked']
-  profile.save()
+  try:
+    timer = Timer.objects.get(profile_user=profile)
+  except ObjectDoesNotExist:
+    timer = Timer.objects.create(profile_user=profile)
+
+  timer.valueOnline = request.data['valueOnline']
+  timer.valueOffline = request.data['valueOffline']
+  timer.blocked = request.data['blocked']
+  timer.lock_up_date = request.data['lockUpDate']
+  timer.save()
 
   return {
-    "valueOnline": profile.valueOnline,
-    "valueOffline": profile.valueOffline,
-    "blocked": profile.blocked,
-    "dateBlocked": profile.date_blocked
+    "valueOnline": timer.valueOnline,
+    "valueOffline": timer.valueOffline,
+    "blocked": timer.blocked,
+    "lockUpDate": timer.lock_up_date
   }
 
 def update_timer_rest_time(request, username):
 
-  try:
-    user = User.objects.get(username=username)
-  except ObjectDoesNotExist:
-    return Response(status=status.HTTP_404_NOT_FOUND)
+  profile = ProfileUser.objects.get(user__username=username)
 
-  profile = ProfileUser.objects.get(user=user)
-  profile.rest_of_time = request.data['restOfTime']
-  profile.save()
+  try:
+    timer = Timer.objects.get(profile_user=profile)
+  except ObjectDoesNotExist:
+    timer = Timer.objects.create(profile_user=profile)
+
+  timer.rest_online = request.data['restOnline']
+  timer.save()
+  return timer.rest_online
 
 
 def like_post_on_id(request, id):

@@ -1,7 +1,7 @@
 .title {
   text-align: center;
   margin-top: 30px;
-  color: #64ffda;
+  color: #9dd3c6;
   font-size: 26px;
   font-weight: 400;
 }
@@ -31,7 +31,7 @@
 .button {
   color: #fff;
   background-color: transparent;
-  border: 1.5px solid #64ffda;
+  border: 1.5px solid #9dd3c6;
   border-radius: 10px;
   padding: 6px 10px;
   width: 130px;
@@ -107,14 +107,14 @@ a.button {
   padding-left: 80px;
 }
 .input:focus {
-  border-bottom: 2px solid #64ffda;
+  border-bottom: 2px solid #9dd3c6;
   padding-left: 10px;
   width: 460px;
 }
 .input:focus + label {
   position: absolute;
   top: -15px;
-  color: #64ffda;
+  color: #9dd3c6;
 }
 .file {
   width: 20%;

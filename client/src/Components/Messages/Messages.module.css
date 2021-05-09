@@ -14,7 +14,7 @@
   justify-content: flex-start;
   width: 30%;
   height: 100%;
-  border-right: 2px solid #64ffda;
+  border-right: 2px solid #9dd3c6;
 }
 .messageBlock {
   width: 70%;
@@ -44,7 +44,7 @@
 }
 .activeDialog {
   transform: scale(1.1, 1.1) !important; 
-  color:#64ffda !important;
+  color:#9dd3c6 !important;
   background-color: rgb(29, 37, 41) !important;
 }
 .ava {
@@ -121,13 +121,13 @@
   transition: .2s;
 }
 .textarea:focus {
-  border-bottom: 2px solid #64ffda;
+  border-bottom: 2px solid #9dd3c6;
 }
 
 .button {
   color: #fff;
   background-color: transparent;
-  border: 1.5px solid #64ffda;
+  border: 1.5px solid #9dd3c6;
   border-radius: 10px;
   margin-top: 10px;
   padding: 4px 10px;

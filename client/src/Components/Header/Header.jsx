@@ -12,7 +12,7 @@ const Header = React.memo(({isAuth, authLogout}) => {
         {
           isAuth ? 
             <button onClick={authLogout} className={style.button}>
-              <LogoutIcon width={30} height={30} fill= "#64ffda" stroke= "#000000"/>
+              <LogoutIcon width={30} height={30} fill= "#9dd3c6" stroke= "#000000"/>
             </button> : 
           <></>
         }

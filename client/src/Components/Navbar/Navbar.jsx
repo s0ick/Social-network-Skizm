@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
-import { ProfileIcon, NewsIcon, SettingsIcon, PomodoroIcon, MusicIcon, MessagesIcon, FriendsIcon } from '../common/Icons/Icons';
+import { ProfileIcon, NewsIcon, SettingsIcon, PomodoroIcon, MusicIcon, MessagesIcon, FriendsIcon, TodoIcon } from '../common/Icons/Icons';
 
 const args = {
   width: 30,
@@ -13,7 +13,8 @@ const translate = {
   Settings: 'Настройки',
   Profile: 'Профиль',
   News: 'Новости',
-  Pomodoro: 'Помидорка'
+  Pomodoro: 'Помидорка',
+  Todo: 'Задачи'
 }
 
 
@@ -30,6 +31,7 @@ const Navbar = React.memo(({item, isAuth, login, blocked}) => {
             {l.link === 'Messages' && <MessagesIcon {...args} />}
             {l.link === 'Music' && <MusicIcon {...args} />}
             {l.link === 'Settings' && <SettingsIcon {...args} />}
+            {l.link === 'Todo' && <TodoIcon {...args} />}
             <span className={style.text}>{translate[l.link]}</span>
           </NavLink>
         </div>

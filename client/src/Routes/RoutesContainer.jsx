@@ -1,8 +1,7 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { setBlocked, setDateBlocked, updatePomodoro } from '../Redux/Reducer/pomodoroReducer';
-import { checkDate } from '../Utils/Helper/helper';
+import { setBlocked, updatePomodoro, updateRestTime, getTimer } from '../Redux/Reducer/pomodoroReducer';
 
 import ProfileContainer from '../Components/Profile/ProfileContainer';
 import Login from '../Components/Login/Login';
@@ -16,30 +15,44 @@ const Music = React.lazy(() => import('../Components/Music/Music'));
 const Settings = React.lazy(() => import('../Components/Settings/Settings'));
 const NewsContainer = React.lazy(() => import('../Components/News/NewsContainer'));
 const PomodoroContainer = React.lazy(() => import('../Components/Pomodoro/PomodoroContainer'));
+const TodoContainer = React.lazy(() => import('../Components/Todo/TodoContainer'));
 
 
 const Routes = (props) => {
+  const [counter, setCounter] = useState(1);
+
+  if(props.login && counter) {
+    props.getTimer(props.login);
+    setCounter(0);
+  }
 
   useEffect(() => {
-    const { login, valueOnline, valueOffline, dateBlocked, blocked } = props;
-      if(!blocked) {
-        let date = new Date().getTime() + new Date(valueOnline * 60000).getTime();
-
-        const intervalID = setInterval(() => {
-          if(checkDate(new Date(date)) && login) {
-  
-            props.setBlocked(true);
-            props.updatePomodoro(login, valueOnline, valueOffline, true, dateBlocked);
-            clearInterval(intervalID);
-          } 
-        }, 1000);
-  
-        return function() {
-          clearInterval(intervalID);
-        };
-      }
+    const { login, valueOnline, valueOffline, blocked, restOnline } = props;
     
-  }, [props.login, props.blocked]);
+    if(blocked) return;
+    let timeOut = 5000;
+
+    const intervalRefresh = setInterval(() => {
+      let newRestTime = restOnline - timeOut;
+      props.updateRestTime(login, newRestTime);
+
+      if(restOnline === 5000 && login) {
+        props.setBlocked(true);
+        let lockUpDate = new Date().getTime() + new Date(valueOffline * 60000).getTime();
+        props.updatePomodoro(login, valueOnline, valueOffline, true, new Date(lockUpDate));
+        clearInterval(intervalRefresh);
+      }  
+    }, timeOut);
+
+    // const intervalCount = setInterval(() => {
+
+    // }, 1000);
+
+    return function() {
+      // clearInterval(intervalCount);
+      clearInterval(intervalRefresh);
+    };
+  }, [props.login, props.blocked, props.restOnline]);
 
             
   if(props.isAuth) {
@@ -60,6 +73,7 @@ const Routes = (props) => {
             <Route path='/news' render={() => <NewsContainer />}/>
             <Route path='/tomato' render={() => <PomodoroContainer />}/>
             <Route path='/music' render={() => <Music />}/>
+            <Route path='/todo' render={() => <TodoContainer />}/>
             <Route path='/settings' render={() => <Settings />}/>
           </Suspense>
           <Redirect to={`/profile/${props.login}`}/>
@@ -84,8 +98,9 @@ const mapStateToProps = (state) => {
     valueOnline: state.TomatoPage.valueOnline,
     valueOffline: state.TomatoPage.valueOffline,
     blocked: state.TomatoPage.blocked,
-    dateBlocked: state.TomatoPage.dateBlocked
+    lockUpDate: state.TomatoPage.lockUpDate,
+    restOnline: state.TomatoPage.restOnline
   }
 };
 
-export const RoutesContainer = connect(mapStateToProps, {setBlocked, setDateBlocked, updatePomodoro})(Routes);
+export const RoutesContainer = connect(mapStateToProps, { getTimer, setBlocked, updatePomodoro, updateRestTime })(Routes);

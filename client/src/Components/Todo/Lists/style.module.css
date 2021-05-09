@@ -1,0 +1,68 @@
+.container {
+  padding: 10px;
+  padding-top: 25px;
+  width: 92%;
+  margin: auto;
+}
+.block {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.listComplete {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.panel {
+  width: 90%;
+  min-height: 100%;
+  margin: auto;
+}
+
+.slick {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 100%;
+  height: 395px;
+  box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, .3);
+  border-radius: 12px;
+  background-color: #263238;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.title {
+  color: #a7ffeb;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  max-width: 320px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  color: #263238;
+}
+
+.pie {
+  width: 50%;
+  height: 250px;
+}
+
+.bar {
+  width: 50%;
+  height: 300px;
+}

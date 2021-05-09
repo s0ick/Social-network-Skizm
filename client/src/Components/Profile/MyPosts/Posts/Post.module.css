@@ -49,7 +49,7 @@
   justify-content: space-between;
   font-size: 16px;
   cursor: pointer;
-  color: #64ffda;
+  color: #9dd3c6;
 }
 
 .message {
@@ -60,7 +60,7 @@
 
 .tags {
   font-size: 16px;
-  color: #64ffda;
+  color: #9dd3c6;
   margin-bottom: 0;
   margin-top: 15px;
 }
@@ -143,5 +143,5 @@
 }
 .action:hover {
   cursor: pointer;
-  color: #64ffda;
+  color: #9dd3c6;
 }

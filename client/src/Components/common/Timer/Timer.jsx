@@ -6,15 +6,15 @@ const Timer = (props) => {
 
   let interval;
 
-  const countTimer = (dateBlocked) => {
+  const countTimer = (lockUpDate) => {
     const getTimeRemaining = () => {
-      let dateStop = new Date(dateBlocked).getTime(),
+      let dateStop = new Date(lockUpDate).getTime(),
           dateNow = new Date().getTime(),
           timeRemaining = (dateStop - dateNow ) / 1000,
           seconds = Math.floor(timeRemaining % 60),
           minutes = Math.floor((timeRemaining / 60) % 60),
           hours  = Math.floor(timeRemaining / 60 / 60);
-      return {timeRemaining, hours, minutes, seconds};
+      return { timeRemaining, hours, minutes, seconds };
     };
 
     const fixInteger = (int) => {
@@ -30,21 +30,23 @@ const Timer = (props) => {
         props.activate(false);
 
         const { username, valueOnline, valueOffline } = props.props;
-        let dateBlocked = new Date().getTime() + new Date((valueOnline + valueOffline) * 60000).getTime();
+        let lockUpDate = new Date().getTime() + new Date((valueOnline + valueOffline) * 60000).getTime();
+        let restOnline = valueOnline * 60000;
 
-        props.updatePomodoro(username, valueOnline, valueOffline, false, new Date(dateBlocked));
+        props.updatePomodoro(username, valueOnline, valueOffline, false, new Date(lockUpDate));
+        props.updateRestTime(username, restOnline);
         clearInterval(interval);
       }
     }, 1000);
   };
 
   useEffect(() => {
-    countTimer(props.props.dateBlocked);
+    countTimer(props.props.lockUpDate);
 
     return function() {
       clearInterval(interval);
     };
-  }, [props.props.dateBlocked, interval]);
+  }, [props.props.lockUpDate, interval]);
   
   
 

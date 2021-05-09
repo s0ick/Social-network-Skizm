@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from .serializers import *
 
-from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto, Like, Comment
+from .models import ProfileUser, Post, AvatarPhoto, BackgroundPhoto, Like, Comment, Task
 from django.contrib.auth.models import User
 from .service import *
 from django.core.exceptions import ObjectDoesNotExist
@@ -58,8 +58,62 @@ def profile_action(request, username):
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def create_task(request):
+  username = request.data["username"]
+  message = request.data["message"]
+
+  profile = ProfileUser.objects.get(user__username=username)
+
+  Task.objects.create(profile_user=profile, message=message)
+  return Response(status=status.HTTP_201_CREATED)
+
+@api_view(['DELETE'])
+def delete_task(request, id):
+  task = Task.objects.get(id=id)
+  task.delete()
+  return Response(status=status.HTTP_200_OK)
+
+@api_view(['GET', 'PUT'])
+def todo_action(request, username):
   
+  try:
+    user = User.objects.get(username=username)
+  except ObjectDoesNotExist:
+    return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+  profile = ProfileUser.objects.get(user=user)
+
+  if request.method == 'GET':
+    try:
+      tasks = Task.objects.filter(profile_user=profile)
+    except ObjectDoesNotExist:
+      return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = TaskSerializer(tasks, context={'request': request}, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+  if request.method == 'PUT':
+    key = request.data["id"]
+    complete = request.data["completed"]
+    date = request.data["dateCompleted"]
+
+    task = Task.objects.get(profile_user=profile, id=key)
+    task.completed = complete
+    task.dateCompleted = date
+    task.save()
+    return Response(status=status.HTTP_200_OK)
+    
+
+@api_view(['GET'])
+def get_tomato(request, username):
+  timer = get_timer(request, username)
+
+  return Response({'valueOnline': timer.valueOnline, 'valueOffline': timer.valueOffline,'blocked': timer.blocked,'lockUpDate': timer.lock_up_date,'restOnline': timer.rest_online})
+
 
 @api_view(['POST'])
 def add_post(request):
@@ -87,14 +141,14 @@ def update_post(request, id):
 
 @api_view(['PUT'])
 def update_tomato(request, username):
-  obj = update_timer(request, username)
-  return Response(data=obj, status=status.HTTP_200_OK)
+  timer = update_timer(request, username)
+  return Response(data=timer, status=status.HTTP_200_OK)
 
 
 @api_view(['PUT'])
 def update_tomato_rest_time(request, username):
-  obj = update_timer_rest_time(request, username)
-  return Response(data=obj, status=status.HTTP_200_OK)
+  time = update_timer_rest_time(request, username)
+  return Response(data=time, status=status.HTTP_200_OK)
 
 
 @api_view(['PUT'])

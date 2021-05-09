@@ -13,7 +13,7 @@
   font-weight: 400;
   margin: 0;
   margin-bottom: 10px;
-  border-bottom: 1.5px solid #64ffda;
+  border-bottom: 1.5px solid #9dd3c6;
   border-radius: 4px;
   padding-bottom: 6px;
 }
@@ -80,7 +80,7 @@
   right: -20px;
   z-index: -1;
   transform: rotate(45deg);
-  border: 1px solid #64ffda;
+  border: 1px solid #9dd3c6;
   opacity: .5;
 }
 

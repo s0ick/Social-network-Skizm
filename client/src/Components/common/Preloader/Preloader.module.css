@@ -15,10 +15,10 @@
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 2px solid #64ffda;
+  border: 2px solid #9dd3c6;
   border-radius: 50%;
   animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #64ffda transparent #64ffda transparent;
+  border-color: #9dd3c6 transparent #9dd3c6 transparent;
 }
 .ldsRing span:nth-child(1) {
   width: 54px;

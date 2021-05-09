@@ -18,7 +18,7 @@ html, body {
 ::-webkit-scrollbar-button {height: 0; background-color: #18181f; }
 ::-webkit-scrollbar-track {  background-color: rgba(153, 153, 153, 0);}
 ::-webkit-scrollbar-track-piece { background-color: rgba(107, 107, 107, 0.199);}
-::-webkit-scrollbar-thumb { height: 50px; background-color: #64ffda; border-radius: 3px;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #9dd3c6; border-radius: 3px;}
 ::-webkit-scrollbar-corner { background-color: rgba(56, 56, 56, 0);}
 ::-webkit-resizer {background-color: rgba(0, 0, 0, 0)}
 
@@ -29,7 +29,7 @@ code {
 
 /* colors {
   #263238 - темный
-  #64ffda - контраст (салатовый)
+  #9dd3c6 - контраст (салатовый)
   #37474f - светло-темный
 
   #ff1744 - красный контраст

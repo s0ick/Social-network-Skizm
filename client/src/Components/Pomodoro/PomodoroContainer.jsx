@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Pomodoro from './Pomodoro';
 import { compose } from 'redux';
-import { setValueOnline, setValueOffline, updatePomodoro } from '../../Redux/Reducer/pomodoroReducer';
+import { setValueOnline, setValueOffline, updatePomodoro, updateRestTime } from '../../Redux/Reducer/pomodoroReducer';
 
 class PomodoroContainer extends React.Component {
 
@@ -17,9 +17,12 @@ class PomodoroContainer extends React.Component {
 
   saveTimer = () => {
     const { username, valueOnline, valueOffline, blocked } = this.props;
-    let dateBlocked = new Date().getTime() + new Date((valueOnline + valueOffline) * 60000).getTime();
-    dateBlocked = new Date(dateBlocked);
-    this.props.updatePomodoro(username, valueOnline, valueOffline, blocked, dateBlocked);
+    
+    let lockUpDate = new Date().getTime() + new Date((valueOnline + valueOffline) * 60000).getTime();
+    let restOnline = valueOnline * 60000;
+    
+    this.props.updatePomodoro(username, valueOnline, valueOffline, blocked, new Date(lockUpDate));
+    this.props.updateRestTime(username, restOnline);
   }
 
   render () {
@@ -39,9 +42,9 @@ const mapStateToProps = (state) => ({
   valueOnline: state.TomatoPage.valueOnline,
   valueOffline: state.TomatoPage.valueOffline,
   blocked: state.TomatoPage.blocked,
-  username: state.auth.login
+  username: state.auth.login,
 });
 
 export default compose(
-  connect(mapStateToProps, {setValueOnline, setValueOffline, updatePomodoro})
+  connect(mapStateToProps, {setValueOnline, setValueOffline, updatePomodoro, updateRestTime})
 )(PomodoroContainer);

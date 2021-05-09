@@ -1,5 +1,4 @@
 import { ProfileAPI } from '../../API/api';
-import { setValueOnline, setValueOffline, setBlocked, setDateBlocked } from './pomodoroReducer';
 
 const FETCHING = 'Profile/FETCHING',
       AVATAR_PHOTO = 'Profile/AVATAR_PHOTO',
@@ -60,10 +59,6 @@ export const getProfile = (username, login) => async (dispatch) => {
 
   await ProfileAPI.getProfile(username)
     .then(response => {
-      dispatch(setBlocked(response.blocked));
-      dispatch(setValueOnline(response.valueOnline));
-      dispatch(setValueOffline(response.valueOffline));
-      dispatch(setDateBlocked(response.date_blocked));
       dispatch(setUserProfile(response));
     });
 

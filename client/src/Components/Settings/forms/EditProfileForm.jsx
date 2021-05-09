@@ -45,7 +45,7 @@ class EditProfileForm extends React.Component {
 
     for(let key in this.props.profile) {
 
-      if(key !== 'pk' && key !== 'blocked' && key !== 'disabled' && key !== 'valueOnline' && key !== 'valueOffline' && key !== 'date_blocked') {
+      if(key !== 'pk') {
        let field = (
          <div className={style.inputBlock} key={`${key}`}>
            <Field component={Input} id={`${inputs[key]}`} name={`${key}`} type={"text"} className={style.input} autoComplete={"off"} />

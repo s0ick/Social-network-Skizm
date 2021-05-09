@@ -10,7 +10,7 @@ import { FacebookIcon, VkIcon, InstIcon, YouTubeIcon, GitHubIcon, WebSiteIcon, T
 const args = {
   width: 30,
   height: 30,
-  fill: "#64ffda",
+  fill: "#9dd3c6",
   stroke: "#000000"
 };
 

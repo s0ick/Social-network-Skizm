@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import ProfileUser, Post, BackgroundPhoto, Comment
+from .models import ProfileUser, Post, BackgroundPhoto, Comment, Task
 
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
@@ -17,7 +17,7 @@ class UserSerializer2(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = ProfileUser
-    fields = ('pk', 'aboutMe', 'userStatus', 'job', 'country', 'city', 'feedName', 'facebook', 'my_site', 'vk', 'twitter', 'instagram', 'you_tube', 'git_hub', 'valueOnline', 'valueOffline', 'blocked', 'date_blocked')
+    fields = ('pk', 'aboutMe', 'userStatus', 'job', 'country', 'city', 'feedName', 'facebook', 'my_site', 'vk', 'twitter', 'instagram', 'you_tube', 'git_hub')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -35,3 +35,9 @@ class CommentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Comment
     fields = ('id', 'username', 'message', 'getAvatarCommentator', 'date')
+
+
+class TaskSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Task
+    fields = ('id', 'message', 'completed', 'dateCompleted')

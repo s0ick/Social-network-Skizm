@@ -1,0 +1,27 @@
+.navbar {
+  margin-top: 10px;
+  padding-top: 7px;
+  padding-left: 25px;
+  padding-right: 40px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 2;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.active {
+  background-color: #37474f;
+  color: #a7ffeb;
+}

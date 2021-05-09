@@ -28,7 +28,7 @@ const Author = (props) => {
 
 
       <NavLink to={`/profile/${props.author}`} className={style.button}>
-        <ArrowIcon width={22} height={22} fill="#64ffda" stroke="#000000"/>
+        <ArrowIcon width={22} height={22} fill="#9dd3c6" stroke="#000000"/>
       </NavLink>
 
       <div className={style.background}>

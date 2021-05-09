@@ -8,7 +8,7 @@
 .title {
   text-align: center;
   margin-top: 30px;
-  color: #64ffda;
+  color: #9dd3c6;
   font-size: 34px;
   font-weight: 400;
 }
@@ -51,7 +51,7 @@
 .button {
   color: #fff;
   background-color: transparent;
-  border: 1.5px solid #64ffda;
+  border: 1.5px solid #9dd3c6;
   border-radius: 10px;
   padding: 6px 10px;
   width: 130px;

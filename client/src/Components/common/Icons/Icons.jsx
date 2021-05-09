@@ -92,6 +92,33 @@ export const LogoutIcon = ({width = 25, height = 25, stroke = '#ff0000', fill = 
   )
 };
 
+export const DoneIcon = ({width = 25, height = 25, stroke = '#ff0000', fill = '#fff'}) => {
+  return (
+    <svg className={style.done} 
+        width={width} 
+        height={height} 
+        stroke={stroke} 
+        fill={fill} 
+        viewBox="0 0 512 512">
+      <polygon points="142.8,323.85 35.7,216.75 0,252.45 142.8,395.25 448.8,89.25 413.1,53.55" />
+    </svg>
+  )
+};
+
+export const DeleteIcon = ({width = 25, height = 25, stroke = '#ff0000', fill = '#fff'}) => {
+  return (
+    <svg className={style.delete} 
+        width={width} 
+        height={height} 
+        stroke={stroke} 
+        fill={fill} 
+        viewBox="0 0 512 512">
+      <path d="M64,341.333C64,364.907,83.093,384,106.667,384h170.667C300.907,384,320,364.907,320,341.333v-256H64V341.333z" />
+			<polygon points="266.667,21.333 245.333,0 138.667,0 117.333,21.333 42.667,21.333 42.667,64 341.333,64 341.333,21.333" />
+    </svg>
+  )
+};
+
 // CONTACTS
 
 export const FacebookIcon = ({width = 25, height = 25, stroke = '#ff0000', fill = '#fff'}) => {
@@ -445,6 +472,19 @@ export const FriendsIcon = ({width = 25, height = 25, fill = '#fff'}) => {
       <path
         d="M168,240c-36.9,0-70.938,15.487-95.833,43.609-24.992,28.23-39.15,67.706-40.114,111.581C48.2,403.413,108.617,432,168,432c64.664,0,120.985-28.389,135.951-36.62-.927-43.952-15.09-83.5-40.118-111.771C238.938,255.487,204.9,240,168,240Z"/>
       <circle cx="168" cy="160" r="64"></circle>
+    </svg>
+  )
+};
+
+export const TodoIcon = ({width = 25, height = 25, fill = '#fff'}) => {
+  return (
+    <svg className={style.todo}
+        width={width} 
+        height={height} 
+        fill={fill} 
+        viewBox="0 0 512 512">
+      <path d="m451 421v-421h-300v61h240v360z" />
+      <path d="m61 512h300v-421h-300zm150-346h105v30h-105zm0 90h105v30h-105zm0 90h105v30h-105zm0 90h105v30h-105zm-86.895-288.105 11.895 11.894 34.395-34.395 21.211 21.211-55.606 55.606-33.105-33.105zm0 90 11.895 11.894 34.395-34.395 21.211 21.211-55.606 55.606-33.105-33.105zm0 90 11.895 11.894 34.395-34.395 21.211 21.211-55.606 55.606-33.105-33.105zm0 90 11.895 11.894 34.395-34.395 21.211 21.211-55.606 55.606-33.105-33.105z" />
     </svg>
   )
 };

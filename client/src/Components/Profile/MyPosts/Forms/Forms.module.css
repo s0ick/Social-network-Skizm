@@ -17,7 +17,7 @@
   transition: .2s;
 }
 .input:focus {
-  border: 1px solid #64ffda;
+  border: 1px solid #9dd3c6;
 }
 
 
@@ -42,7 +42,7 @@
   transition: .2s;
 }
 .textareaBig:focus, .textareaSmall:focus {
-  border-bottom: 2px solid #64ffda;
+  border-bottom: 2px solid #9dd3c6;
 }
 .textareaSmall {
   min-width: 400px;
@@ -53,7 +53,7 @@
 .button {
   color: #fff;
   background-color: transparent;
-  border: 1.5px solid #64ffda;
+  border: 1.5px solid #9dd3c6;
   border-radius: 10px;
   margin-top: 10px;
   padding: 6px 10px;
@@ -95,7 +95,7 @@
   top: 18px;
   right: 18px;
   font-size: 18px;
-  color: #64ffda;
+  color: #9dd3c6;
   cursor: pointer;
 }
 
@@ -104,7 +104,7 @@
   font-weight: 400;
   margin: 0;
   margin-bottom: 10px;
-  border-bottom: 1.5px solid #64ffda;
+  border-bottom: 1.5px solid #9dd3c6;
   border-radius: 4px;
   padding-bottom: 6px;
 }

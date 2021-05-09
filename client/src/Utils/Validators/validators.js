@@ -1,5 +1,5 @@
 export const required = (value) => {
-  if(value) if(value.trim()) return undefined;
+  if(value) if(typeof value === 'object' || value.trim()) return undefined;
   return "Field is required";
 };
 

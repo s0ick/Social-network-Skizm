@@ -12,7 +12,7 @@
 .button {
   color: #fff;
   background-color: transparent;
-  border: 1.5px solid #64ffda;
+  border: 1.5px solid #9dd3c6;
   border-radius: 10px;
   margin-top: 10px;
   height: 30px;
@@ -65,6 +65,6 @@ span {
 }
 .selectedPage {
   font-weight: 700;
-  color: #64ffda;
+  color: #9dd3c6;
   font-size: 18px;
 }

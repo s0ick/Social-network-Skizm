@@ -6,7 +6,8 @@ const initialState = {
     // {url:'/music', link: 'Music'},
     // {url:'/users', link: 'Friends'},
     {url:'/tomato', link: 'Pomodoro'},
-    {url:'/settings', link: 'Settings'}
+    {url:'/settings', link: 'Settings'},
+    {url:'/todo', link: 'Todo'}
   ]
 };
 

@@ -18,6 +18,8 @@ export const NewsAPI = {
   }
 };
 
+
+
 export const ProfileAPI = {
   getProfile(username) {
     const url = `${API_BASE_URL}users/profile/${username}`;
@@ -53,6 +55,8 @@ export const ProfileAPI = {
   },
 };
 
+
+
 export const PostAPI = {
   setPost(photo, textBody, tags, username) {
     const url = `${API_BASE_URL}users/add_post/`;
@@ -77,22 +81,41 @@ export const PostAPI = {
       .put(url, {username})
       .then(response => response.data);
   },
+
   commentPost(id, username, comment) {
     const url = `${API_BASE_URL}users/add_comment_post_on_id/${id}`;
     return Axios
       .post(url, {username, comment})
       .then(response => response);
   }
-}
+};
+
+
 
 export const TimerAPI = {
-  updatePomodoro(username, valueOnline, valueOffline, blocked, dateBlocked) {
+  getTimer(username) {
+    const url = `${API_BASE_URL}users/get_tomato/${username}`;
+    return Axios
+      .get(url)
+      .then(response => response);
+  },
+
+  updatePomodoro(username, valueOnline, valueOffline, blocked, lockUpDate) {
     const url = `${API_BASE_URL}users/update_tomato/${username}`;
     return Axios
-      .put(url, {valueOnline, valueOffline, blocked, dateBlocked})
-      .then(response => response)
+      .put(url, {valueOnline, valueOffline, blocked, lockUpDate})
+      .then(response => response);
   },
-}
+
+  updateRestTime(username, restOnline) {
+    const url = `${API_BASE_URL}users/update_rest_of_time/${username}`;
+    return Axios
+      .put(url,  {username, restOnline})
+      .then(response => response);
+  }
+};
+
+
 
 export const AuthAPI = {
   registration(newUser) {
@@ -103,5 +126,33 @@ export const AuthAPI = {
   authLogin(username, password) {
     const url = `${API_BASE_URL}users/user_login/`;
     return Axios.post(url, {username, password});
+  }
+};
+
+
+
+export const TodoAPI = {
+  createTask(username, task) {
+    const url = `${API_BASE_URL}users/add_task/`;
+    return Axios.post(url, {username, message: task.message});
+  },
+
+  getTasks(username) {
+    const url = `${API_BASE_URL}users/todo/${username}`;
+    return Axios
+      .get(url)
+      .then(response => response);
+  },
+
+  deleteTask(id) {
+    const url = `${API_BASE_URL}users/delete_task/${id}`;
+    return Axios.delete(url);
+  },
+
+  updateTask(username, id, task) {
+    const url = `${API_BASE_URL}users/todo/${username}`;
+    return Axios
+      .put(url, {id, ...task})
+      .then(response => response);
   }
 };

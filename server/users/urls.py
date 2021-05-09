@@ -26,6 +26,11 @@ urlpatterns = [
 
   url(r'^tags/(?P<username>[0-9a-zA-z]+)$', tags_action),
 
+  url(r'^get_tomato/(?P<username>[0-9a-zA-z]+)$', get_tomato),
   url(r'^update_tomato/(?P<username>[0-9a-zA-z]+)$', update_tomato),
   url(r'^update_rest_of_time/(?P<username>[0-9a-zA-z]+)$', update_tomato_rest_time),
+
+  url(r'^todo/(?P<username>[0-9a-zA-z]+)$', todo_action),
+  url('add_task/', create_task),
+  url(r'^delete_task/(?P<id>[0-9]+)$', delete_task),
 ]

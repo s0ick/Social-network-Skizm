@@ -1,5 +1,6 @@
 import React from 'react';
 import { CircleSlider } from "react-circle-slider";
+import Timer from '../common/Timer/Timer';
 import style from './Pomodoro.module.css';
 
 const Pomodoro = React.memo((props) => {
@@ -17,7 +18,7 @@ const Pomodoro = React.memo((props) => {
             value={props.valueOnline} 
             onChange={props.handleChangeOnline}
             showTooltip="true"
-            gradientColorFrom="#64ffda"
+            gradientColorFrom="#9dd3c6"
             gradientColorTo="#0091ea"
             tooltipColor="#fff"
             size={240}

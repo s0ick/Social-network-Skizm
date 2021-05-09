@@ -11,7 +11,6 @@ def upload_path_for_avatar(instance, filename):
 
 
 class ProfileUser(models.Model):
-
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   aboutMe = models.CharField('About me', max_length=255, null=True, blank=True)
   userStatus = models.CharField('User status', max_length=255, null=True, blank=True)
@@ -27,14 +26,32 @@ class ProfileUser(models.Model):
   you_tube = models.URLField(max_length=255, null=True, blank=True)
   git_hub = models.URLField(max_length=255, null=True, blank=True)
   tags = models.TextField("Tags", null=True, blank=True)
-  valueOnline = models.IntegerField("Time in online", default=20)
-  valueOffline = models.IntegerField("Time in offline", default=5)
-  blocked = models.BooleanField("Blocked app", default=False)
-  date_blocked = models.DateTimeField(auto_now_add=False, editable=True, null=True, blank=True)
-  rest_of_time = models.DateTimeField(auto_now_add=False, editable=True, null=True, blank=True)
 
   def __str__(self):
     return self.user.username
+
+  
+class Timer(models.Model):
+  profile_user = models.ForeignKey(ProfileUser, verbose_name="Author", on_delete=models.CASCADE)
+  valueOnline = models.IntegerField("Time in online", default=40)
+  valueOffline = models.IntegerField("Time in offline", default=5)
+  blocked = models.BooleanField("Blocked app", default=False)
+  rest_online = models.IntegerField("Rest of time in online (mill.)", default=1200000)
+  lock_up_date = models.DateTimeField(auto_now_add=False, editable=True, null=True, blank=True)
+
+  def __str__(self):
+    return self.profile_user.user.username
+
+
+class Task(models.Model):
+  profile_user = models.ForeignKey(ProfileUser, verbose_name="Author", on_delete=models.CASCADE)
+  message = models.TextField("Task")
+  completed = models.BooleanField("State task", default=False)
+  dateCompleted = models.DateTimeField(auto_now_add=False, editable=True, null=True, blank=True)
+
+  def __str__(self):
+    return self.profile_user.user.username
+
 
 class AvatarPhoto(models.Model):
   profile_user = models.ForeignKey(ProfileUser, verbose_name="Author", on_delete=models.CASCADE)
@@ -54,6 +71,7 @@ class AvatarPhoto(models.Model):
   def __str__(self):
     return self.profile_user.user.username
 
+
 class BackgroundPhoto(models.Model):
   profile_user = models.ForeignKey(ProfileUser, verbose_name="Author", on_delete=models.CASCADE)
   image = models.ImageField('Background', upload_to=upload_path_for_avatar, null=True, blank=True)
@@ -71,6 +89,7 @@ class BackgroundPhoto(models.Model):
 
   def __str__(self):
     return self.profile_user.user.username         
+
 
 class Post(models.Model):
   profile_user = models.ForeignKey(ProfileUser, verbose_name="Author", on_delete=models.CASCADE)
@@ -110,12 +129,14 @@ class Post(models.Model):
   def __str__(self):
     return self.short_text
 
+
 class Like(models.Model):
   post = models.ForeignKey(Post, verbose_name="Post", on_delete=models.CASCADE)
   username = models.CharField("User", max_length=100)
 
   def __str__(self):
     return self.username + " post_id: " + str(self.post.pk)
+
 
 class Comment(models.Model):
   post = models.ForeignKey(Post, verbose_name="Post", on_delete=models.CASCADE)

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import style from './Forms.module.css';
-import { SendIcon } from '../../../common/Icons/Icons';
+import style from './style.module.css';
+import { SendIcon } from '../../common/Icons/Icons';
 
 
-const CommentForm = ({sendComment, addComment}) => {
+const AddTaskForm = ({addTask}) => {
   const [formValue, setFormValue] = useState('');
   const [disabled, setDisabled] = useState(true);
 
@@ -18,31 +18,30 @@ const CommentForm = ({sendComment, addComment}) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    sendComment(formValue);
-    addComment(formValue);
+    addTask(formValue);
     setFormValue('');
   };
 
   return (
-   <form onSubmit={onSubmit}  className={style.panelRow}>
+    <form onSubmit={onSubmit}  className={style.panelRow}>
 
-     <div className={style.leftColumn}>
-       <input onChange={(event) => onChangeInput(event.target.value)}
+      <div className={style.leftColumn}>
+        <input onChange={(event) => onChangeInput(event.target.value)}
               value={formValue} 
-              name={"commentBody"} 
-              placeholder='Написать комментарий...' 
+              name={"message"} 
+              placeholder='Напишите задачу...' 
               className={style.input} 
               type={"text"} 
               autoComplete={"off"} />
-     </div>
-     <div className={style.rightColumnFix}>
+      </div>
+      <div className={style.rightColumnFix}>
         <button disabled={disabled} className={style.send}>
           <SendIcon stroke={'none'} fill={disabled ? '#565c68' : '#9dd3c6'} />
         </button>
-     </div>
+      </div>
 
-   </form>
+    </form>
   )
 };
 
-export default CommentForm;
+export default AddTaskForm;
